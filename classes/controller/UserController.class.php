@@ -9,6 +9,8 @@ use \app\common\Db;
 use \app\common\InvalidErrorException;
 use \app\common\ExceptionCode;
 use \app\common\Request;
+use Abraham\TwitterOAuth\TwitterOAuth;
+
 
 /**
 * UserController クラス
@@ -16,9 +18,6 @@ use \app\common\Request;
 */
 class UserController extends ControllerBase
 {
-  //!ログイン成功時の遷移先
-  const TARGET_PAGE = 'user/main';
-
   //!セッション保存用の名前
   const LOGINUSER = 'lum';
 
@@ -27,210 +26,85 @@ class UserController extends ControllerBase
   */
   public function mainAction()
   {
-    global $WEB_URL;
+    //セッションに入れておいたさっきの配列
+    $access_token = $_SESSION['access_token'];
 
-    $this->checkLogin();
+    //OAuthトークンとシークレットも使って TwitterOAuth をインスタンス化
+    $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 
-    //ログイン中モデルを取得
-    $objUM = new UserModel;
-    $objUM = UserController::getLoginUser();
-
-    //結果
-    $res = [];
-
-    //全シフトを取得
-    $works = WorkDao::getDaoFromUserId($objUM->id);
-
-    //今月について
-    $strmonth = date('Y-m');
-    $works1 = [];
-    foreach($works as $item)
-    {
-        if(strstr($item['start'], $strmonth))
-        {
-            array_push($works1, $item);
-        }
-    }
-    list($res1, $sum1) = WorkController::makeShiftArray($works1);
-    $this->view->assign('works1', $res1);
-    $this->view->assign('m1', date('Y年m月'));
-    $this->view->assign('sum1', $sum1);
-
-
-    //先月について
-    $strmonth = date('Y-m', strtotime('-1 month'));
-    $works2 = [];
-    foreach($works as $item)
-    {
-        if(strstr($item['start'], $strmonth))
-        {
-            array_push($works2, $item);
-        }
-    }
-    list($res2, $sum2) = WorkController::makeShiftArray($works2);
-    $this->view->assign('works2', $res2);
-    $this->view->assign('m2', date('Y年m月', strtotime('-1 month')));
-    $this->view->assign('sum2', $sum2);
-
-    //先々月について
-    $strmonth = date('Y-m', strtotime('-2 month'));
-    $works3 = [];
-    foreach($works as $item)
-    {
-        if(strstr($item['start'], $strmonth))
-        {
-            array_push($works3, $item);
-        }
-    }
-    list($res3, $sum3) = WorkController::makeShiftArray($works3);
-    $this->view->assign('works3', $res3);
-    $this->view->assign('m3', date('Y年m月', strtotime('-2 month')));
-    $this->view->assign('sum3', $sum3);
-
-    $this->view->assign('WEB', $WEB_URL);
-    $this->view->assign('user', (array)$objUM);
+    //ユーザー情報をGET
+    $user = $connection->get("account/verify_credentials");
+    $this->view->assign('username', $user->name);
   }
 
   /**
-  *ユーザ登録
+  * コールバック
   */
-  public function registerAction()
+  public function callbackAction()
   {
-    global $WEB_URL;
-    //もしpostされていれば
-    if(null != $_POST)
-    {
-        //値を受け取り空欄がないかチェック
-        $email = filter_input(INPUT_POST, 'email');
-        $pass = filter_input(INPUT_POST, 'pass');
-        $family_name = filter_input(INPUT_POST, 'family_name');
-        $first_name = filter_input(INPUT_POST, 'first_name');
-        $zipcode = filter_input(INPUT_POST, 'zipcode');
-        $address = filter_input(INPUT_POST, 'address');
-        $phone = filter_input(INPUT_POST, 'phone');
-        if(null == $email || null == $pass || null == $family_name || null == $first_name || null == $address || null == $phone)
-        {
-            throw new InvalidErrorException(ExceptionCode::INVALID_FORM);
-        }
-        else
-        {
-            //登録
+    $request_token = [];
+    $request_token['oauth_token'] = $_SESSION['oauth_token'];
+    $request_token['oauth_token_secret'] = $_SESSION['oauth_token_secret'];
 
-            // ユーザー情報
-            $arrUM = [
-            'id' => null,
-            'email' => $email,
-            'password' => password_hash($pass, PASSWORD_DEFAULT),
-            'permissions' => null,
-            'last_login' => null,
-            'first_name' => $first_name,
-            'last_name' => $family_name,
-            'zipcode' => $zipcode,
-            'address' => $address,
-            'phone' => $phone,
-            'created_at' => null,
-            'updated_at' => time()
-            ];
-
-            //ユーザモデル
-            $objUM = new UserModel($arrUM);
-
-            // 登録済みかを確認
-            if (!UserController::checkMailAddress($email)) {
-                // 存在しない場合は、新規登録
-                Db::transaction();
-                $objUM->register();
-                Db::commit();
-                header('Location: '.$WEB_URL);
-            }
-        }
+    //Twitterから返されたOAuthトークンと、あらかじめlogin.phpで入れておいたセッション上のものと一致するかをチェック
+    if (isset($_REQUEST['oauth_token']) && $request_token['oauth_token'] !== $_REQUEST['oauth_token']) {
+      die( 'Error!' );
     }
 
+    $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $request_token['oauth_token'], $request_token['oauth_token_secret']);
+    $_SESSION['access_token'] = $connection->oauth("oauth/access_token", array("oauth_verifier" => $_REQUEST['oauth_verifier']));
+
+    $user = $connection->get("account/verify_credentials");
+    $id = $user->id;
+
+    //データベースに存在しなければ登録、する場合ログイン
+    $objUM = new UserModel;
+    if(null != $objUM->getModelById($id))
+    {
+      //存在する場合
+      $objUM->name = $user->name;
+      $objUM->screen_name = $user->screen_name;
+      $objUM->updated_at = date('Y/m/d H:i:s');
+      Db::transaction();
+      $objUM->save();
+      Db::commit();
+      $_SESSION[LOGINUSER] = $objUM;
+    }
+    else
+    {
+      var_dump($user);
+      $objUM->id = $user->id;
+      $objUM->name = $user->name;
+      $objUM->screen_name = $user->screen_name;
+      $objUM->updated_at = date('Y/m/d H:i:s');
+      $objUM->created_at = date('Y/m/d H:i:s');
+      Db::transaction();
+      $objUM->register();
+      Db::commit();
+      $_SESSION[LOGINUSER] = $objUM;
+    }
+
+    //マイページへリダイレクト
+    header( 'location: '.WEB_URL.'user/main' );
   }
 
   /**
-  * メールアドレスとパスワードでログインする
+  * ログインする
   *
   * @return void
   */
   static public function loginAction()
   {
-    global $WEB_URL;
-    //非POST時は処理中断
-    if(!filter_input_array(INPUT_POST))
-    {
-      header('Location: '.$WEB_URL);
-    }
 
-    //POSTから値を受け取る
-    $email = filter_input(INPUT_POST, 'email');
-    $password = filter_input(INPUT_POST, 'pass');
-    $redirectURL = filter_input(INPUT_GET, 'nexturl');
+    $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET);
+    $request_token = $connection->oauth('oauth/request_token', array('oauth_callback' => OAUTH_CALLBACK));
 
-    //どちらかがからの場合は何もしない
-    if($email == '' || $password == '')
-    {
-      header('Location: '.$WEB_URL);
-    }
+    $_SESSION['oauth_token'] = $request_token['oauth_token'];
+    $_SESSION['oauth_token_secret'] = $request_token['oauth_token_secret'];
+    $url = $connection->url('oauth/authenticate', array('oauth_token' => $request_token['oauth_token']));
 
-    //ADMIN用処理
-    if($email == ADMIN_MAIL)
-    {
-      if(password_verify($password, ADMIN_HASH))
-      {
-        Db::transaction();
-        $objUM = new UserModel();
-        $objUM->getModelById(1);
-        //ログイン成功時
-        $objUM->last_login = date('Y-m-d H:i:s');
-        $objUM->save();
-        Db::commit();
-
-        //セッション固定攻撃用対策
-        session_regenerate_id(true);
-
-        //セッションにUserModelを保存
-        $_SESSION[self::LOGINUSER] = $objUM;
-
-        //ページ遷移
-        header("location: ".$WEB_URL."/main_manage.php");
-      }
-    }
-
-    //リダイレクト先がない場合, mainPageを指定
-    if (null == $redirectURL)
-    {
-      $redirectURL = self::TARGET_PAGE;
-    }
-
-
-    //トランザクション開始
-    Db::transaction();
-    //emailからUserModelを取得する
-    $objUM = new UserModel();
-    $objUM->getModelByMailAddress($email);
-
-    //パスワードチェック
-    if(!$objUM->checkPassword($password))
-    {
-      //ログイン失敗時
-      Db::commit();
-      throw new InvalidErrorException(ExceptionCode::INVALID_LOGIN_FAIL);
-    }
-
-    //ログイン成功時
-    $objUM->last_login = date('Y-m-d H:i:s');
-    $objUM->save();
-    Db::commit();
-
-    //セッション固定攻撃用対策
-    session_regenerate_id(true);
-
-    //セッションにUserModelを保存
-    $_SESSION[self::LOGINUSER] = $objUM;
-
-    //ページ遷移
-    header(sprintf("location: %s%s", $WEB_URL, $redirectURL));
+    //Twitter.com の認証画面へリダイレクト
+    header( 'location: '. $url );
   }
 
   /**
@@ -240,7 +114,7 @@ class UserController extends ControllerBase
   * @param bool リダイレクトするか
   * @return void
   */
-  static public function checkLogin($redirectURL = 'index.php', $redirect = true)
+  static public function checkLogin($redirectURL = '', $redirect = true)
   {
     global $WEB_URL;
 
@@ -282,17 +156,5 @@ class UserController extends ControllerBase
     $_SESSION = [];
     session_destroy();
     header('Location: '.$WEB_URL);
-  }
-
-  /**
-  * メールアドレスが使われているかチェックする
-  * アドレスが使われていたらtrue, 使われていなかったらfalse
-  *
-  * @return void
-  */
-  static public function checkMailAddress($email)
-  {
-    $dao = UserDao::getDaoFromEmail($email);
-    return isset($dao[0]);
   }
 }

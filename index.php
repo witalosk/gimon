@@ -1,5 +1,5 @@
 <?php
-require '../common.php';
+require 'common.php';
 use app\common\Dispatcher;
 //session開始
 @session_start();

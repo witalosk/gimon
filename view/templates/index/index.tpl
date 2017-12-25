@@ -2,7 +2,7 @@
 <div class="uk-container uk-text-center">
   <div class="uk-card uk-card-default uk-card-body">
     <h3 class="">匿名質問サービス<br>「gimon.noyatsu」</h3>
-    <form action="user/login" method="post">
+    <!--<form action="user/login" method="post">
       <div>
         <label>E-mail</label>
         <input class="uk-input" type="text" name="email">
@@ -13,7 +13,8 @@
       </div>
       <input class="uk-button uk-button-primary uk-margin" type="submit" value="Login" style="cursor: pointer;">
     </form>
-    <a class="uk-button" href="user/register">New account</a>
+    <a class="uk-button" href="user/register">New account</a>-->
+    <a class="uk-button uk-button-primary" href="user/login">Login width Twitter</a>
   </div>
 </div>
 {include file='../template/footer.tpl'}
