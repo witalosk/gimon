@@ -36,9 +36,9 @@ final class UserModel
     public function setProperty($array)
     {
         $this->id = $array['id'];
-        $this->email = $array['name'];
-        $this->password = $array['screen_name'];
-        $this->permissions = $array['blocklist'];
+        $this->name = $array['name'];
+        $this->screen_name = $array['screen_name'];
+        $this->blocklist = $array['blocklist'];
         $this->created_at = $array['created_at'];
         $this->updated_at = $array['updated_at'];
 

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.32-dev-35, created on 2017-12-21 01:56:23
+/* Smarty version 3.1.32-dev-35, created on 2018-01-09 11:14:43
   from 'C:\xampp\htdocs\gimon\view\templates\template\header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.32-dev-35',
-  'unifunc' => 'content_5a3a9637f37bd1_71659424',
+  'unifunc' => 'content_5a542593952bc2_30018902',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2ce3e88fb7d8982d364d6f1ad5df3f5c32790510' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gimon\\view\\templates\\template\\header.tpl',
-      1 => 1513788980,
+      1 => 1515464052,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a3a9637f37bd1_71659424 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a542593952bc2_30018902 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,7 +40,7 @@ js/uikit.min.js"><?php echo '</script'; ?>
 js/uikit-icons.min.js"><?php echo '</script'; ?>
 >
 </head>
-<body>
+<body class="uk-background-muted">
   <header class="">
     <nav class="default-primary-color primary-text-color uk-padding" uk-navbar>
       <div class="uk-navbar-left">

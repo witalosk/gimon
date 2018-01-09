@@ -8,7 +8,7 @@
   <script src="{$WEB}js/uikit.min.js"></script>
   <script src="{$WEB}js/uikit-icons.min.js"></script>
 </head>
-<body>
+<body class="uk-background-muted">
   <header class="">
     <nav class="default-primary-color primary-text-color uk-padding" uk-navbar>
       <div class="uk-navbar-left">

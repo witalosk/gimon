@@ -54,12 +54,26 @@ class UserController extends ControllerBase
     $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $request_token['oauth_token'], $request_token['oauth_token_secret']);
     $_SESSION['access_token'] = $connection->oauth("oauth/access_token", array("oauth_verifier" => $_REQUEST['oauth_verifier']));
 
+    header( 'location: '.WEB_URL.'user/update' );
+  }
+
+  /**
+  * データベースを更新・挿入
+  */
+  public function updateAction()
+  {
+    $access_token = $_SESSION['access_token'];
+
+    //OAuthトークンとシークレットも使って TwitterOAuth をインスタンス化
+    $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
+
     $user = $connection->get("account/verify_credentials");
-    $id = $user->id;
+    $id = (int)$user->id;
 
     //データベースに存在しなければ登録、する場合ログイン
     $objUM = new UserModel;
-    if(null != $objUM->getModelById($id))
+    $objUM->getModelById($id);
+    if(null != $objUM->id)
     {
       //存在する場合
       $objUM->name = $user->name;
@@ -72,8 +86,7 @@ class UserController extends ControllerBase
     }
     else
     {
-      var_dump($user);
-      $objUM->id = $user->id;
+      $objUM->id = $id;
       $objUM->name = $user->name;
       $objUM->screen_name = $user->screen_name;
       $objUM->updated_at = date('Y/m/d H:i:s');
@@ -84,7 +97,7 @@ class UserController extends ControllerBase
       $_SESSION[LOGINUSER] = $objUM;
     }
 
-    //マイページへリダイレクト
+    //トップページにリダイレクト
     header( 'location: '.WEB_URL.'user/main' );
   }
 
@@ -93,7 +106,7 @@ class UserController extends ControllerBase
   *
   * @return void
   */
-  static public function loginAction()
+  public function loginAction()
   {
 
     $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET);

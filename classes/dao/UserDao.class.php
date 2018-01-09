@@ -20,14 +20,15 @@ class UserDao
     public static function getDaoFromId($id)
     {
         $sql = "SELECT ";
-        $sql .= "* ";
+        $sql .= " * ";
         $sql .= "FROM `user` ";
         $sql .= "WHERE `id` = :id ";
 
         $arr = array();
         $arr[':id'] = $id;
 
-        return Db::select($sql, $arr);
+        $res = Db::select($sql, $arr);
+        return $res;
     }
 
     /**
@@ -63,7 +64,7 @@ class UserDao
     public static function insert(UserModel $objUM)
     {
         $sql = "INSERT INTO `user` VALUES (";
-        $sql .= "NULL ";
+        $sql .= ":id ";
         $sql .= ", :name ";
         $sql .= ", :screen_name ";
         $sql .= ", :blocklist ";
@@ -72,6 +73,7 @@ class UserDao
         $sql .= ")";
 
         $arr = array();
+        $arr[':id'] = $objUM->id;
         $arr[':name'] = $objUM->name;
         $arr[':screen_name'] = $objUM->screen_name;
         $arr[':blocklist'] = $objUM->blocklist;
