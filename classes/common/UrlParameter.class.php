@@ -13,9 +13,9 @@ class urlParameter extends RequestVariables
       //パラメータをスラッシュで分割
       $params = explode("/", $param);
     }
-    for(int $i = 0; $i<(count($temp)*2); $i++)
+    for($i = 0; $i < (count($temp)*2); $i++)
     {
-      $this->_values[$params[$i]] = $params[$i+1];
+      $this->values[$params[$i]] = $params[$i+1];
     }
   }
 }
