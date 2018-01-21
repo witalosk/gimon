@@ -4,7 +4,6 @@ namespace app\controller;
 
 use \app\model\UserModel;
 use \app\dao\UserDao;
-use \app\dao\WorkDao;
 use \app\common\Db;
 use \app\common\InvalidErrorException;
 use \app\common\ExceptionCode;
