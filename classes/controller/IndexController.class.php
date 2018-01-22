@@ -6,7 +6,9 @@ class IndexController extends ControllerBase
 {
   public function indexAction()
   {
-
+    if(UserController::checkLogin('',false) == true) {
+      header('Location: '.WEB_URL.'user/main');
+    }
   }
 
 }

@@ -12,71 +12,105 @@ use app\model\GimonModel;
 class GimonDao
 {
 
-    /**
-    * ユーザーIDから配列を取得する
-    * @param int $gimonId
-    * @return array
-    */
-    public static function getDaoFromId($id)
-    {
-        $sql = "SELECT ";
-        $sql .= " * ";
-        $sql .= "FROM `gimon` ";
-        $sql .= "WHERE `id` = :id ";
+  /**
+  * 疑問IDから配列を取得する
+  * @param int $gimonId
+  * @return array
+  */
+  public static function getDaoFromId($id)
+  {
+    $sql = "SELECT ";
+    $sql .= " * ";
+    $sql .= "FROM `gimon` ";
+    $sql .= "WHERE `id` = :id ";
 
-        $arr = array();
-        $arr[':id'] = $id;
+    $arr = array();
+    $arr[':id'] = $id;
 
-        $res = Db::select($sql, $arr);
-        return $res;
-    }
+    $res = Db::select($sql, $arr);
+    return $res;
+  }
 
-    /**
-    * 更新する
-    * @param GimonModel $objGM
-    * @return bool
-    */
-    public static function save(GimonModel $objGM)
-    {
-        $sql = "UPDATE `gimon` SET ";
-        $sql .= "`name`= :name, ";
-        $sql .= "`ipaddress`= :ipaddress, ";
-        $sql .= "`text`= :text, ";
-        $sql .= "`created_at`= :created_at ";
-        $sql .= "WHERE `id` = :id ";
+  /**
+  * ユーザIDから配列を取得する
+  * @param int $destinationId
+  * @return array
+  */
+  public static function getDaoFromDestinationId($id)
+  {
+    $sql = "SELECT ";
+    $sql .= " * ";
+    $sql .= "FROM `gimon` ";
+    $sql .= "WHERE `destination` = :id ";
 
-        $arr = array();
-        $arr[':name'] = $objGM->name;
-        $arr[':ipaddress'] = $objGM->ipaddress;
-        $arr[':text'] = $objGM->text;
-        $arr[':created_at'] = $objGM->created_at;
-        $arr[':id'] = $objGM->id;
+    $arr = array();
+    $arr[':id'] = $id;
 
-        return Db::update($sql, $arr);
-    }
+    $res = Db::select($sql, $arr);
+    return $res;
+  }
 
-    /**
-    * 新規作成する
-    * @return int
-    */
-    public static function insert(GimonModel $objGM)
-    {
-        $sql = "INSERT INTO `gimon` VALUES (";
-        $sql .= ":id ";
-        $sql .= ", :name ";
-        $sql .= ", :ipaddress ";
-        $sql .= ", :text ";
-        $sql .= ", :created_at ";
-        $sql .= ")";
+  /**
+  * 更新する
+  * @param GimonModel $objGM
+  * @return bool
+  */
+  public static function save(GimonModel $objGM)
+  {
+    $sql = "UPDATE `gimon` SET ";
+    $sql .= "`destination`= :destination, ";
+    $sql .= "`ipaddress`= :ipaddress, ";
+    $sql .= "`text`= :text, ";
+    $sql .= "`created_at`= :created_at ";
+    $sql .= "WHERE `id` = :id ";
 
-        $arr = array();
-        $arr[':id'] = $objGM->id;
-        $arr[':name'] = $objGM->name;
-        $arr[':ipaddress'] = $objGM->ipaddress;
-        $arr[':text'] = $objGM->text;
-        $arr[':created_at'] = $objGM->created_at;
+    $arr = array();
+    $arr[':name'] = $objGM->name;
+    $arr[':destination'] = $objGM->destination;
+    $arr[':ipaddress'] = $objGM->ipaddress;
+    $arr[':text'] = $objGM->text;
+    $arr[':created_at'] = $objGM->created_at;
+    $arr[':id'] = $objGM->id;
 
-        return Db::insert($sql, $arr);
-    }
+    return Db::update($sql, $arr);
+  }
+
+  /**
+  * 新規作成する
+  * @return int
+  */
+  public static function insert(GimonModel $objGM)
+  {
+    $sql = "INSERT INTO `gimon` VALUES (";
+    $sql .= ":id ";
+    $sql .= ", :destination ";
+    $sql .= ", :ipaddress ";
+    $sql .= ", :text ";
+    $sql .= ", :created_at ";
+    $sql .= ")";
+
+    $arr = array();
+    $arr[':id'] = $objGM->id;
+    $arr[':destination'] = $objGM->destination;
+    $arr[':ipaddress'] = $objGM->ipaddress;
+    $arr[':text'] = $objGM->text;
+    $arr[':created_at'] = $objGM->created_at;
+
+    return Db::insert($sql, $arr);
+  }
+
+  /**
+  * 削除する
+  */
+  public static function delete(GimonModel $objGM)
+  {
+    $sql = "DELETE FROM `gimon` ";
+    $sql .= "WHERE `id`=:id";
+
+    $arr = [];
+    $arr[':id'] = $objGM->id;
+
+    return Db::delete($sql, $arr);
+  }
 
 }

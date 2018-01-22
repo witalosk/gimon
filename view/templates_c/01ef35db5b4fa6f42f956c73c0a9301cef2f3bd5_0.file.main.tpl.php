@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.32-dev-35, created on 2018-01-09 11:25:30
+/* Smarty version 3.1.32-dev-35, created on 2018-01-22 17:34:35
   from 'C:\xampp\htdocs\gimon\view\templates\user\main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.32-dev-35',
-  'unifunc' => 'content_5a54281a25d161_09713877',
+  'unifunc' => 'content_5a65a21bc95d20_72775691',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '01ef35db5b4fa6f42f956c73c0a9301cef2f3bd5' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gimon\\view\\templates\\user\\main.tpl',
-      1 => 1515464728,
+      1 => 1516610073,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../template/footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a54281a25d161_09713877 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a65a21bc95d20_72775691 (Smarty_Internal_Template $_smarty_tpl) {
 ob_start();
 echo $_smarty_tpl->tpl_vars['WEB']->value;
 $_prefixVariable1 = ob_get_clean();
@@ -30,42 +30,75 @@ $_smarty_tpl->_subTemplateRender('file:../template/header.tpl', $_smarty_tpl->ca
 ?>
 
 <div class="uk-container uk-text-center">
-  <h3>Gimons for <?php echo $_smarty_tpl->tpl_vars['username']->value;?>
+  <h3 class="uk-margin-top">Gimons for <?php echo $_smarty_tpl->tpl_vars['username']->value;?>
 </h3>
-  <br>
+  <p>Your URL for posting gimons: <a href="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
+" class="uk-button uk-button-text"><?php echo $_smarty_tpl->tpl_vars['url']->value;?>
+</a></p>
+  <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['gimons']->value, 'gimon');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['gimon']->value) {
+?>
   <div class="uk-card uk-card-default uk-card-small">
     <div class="uk-card-body">
-      <p>なんとかなんですか？</p>
-      <p class="uk-text-meta uk-margin-remove-top"><time>2018-01-09 11:21:34</time></p>
+      <p><?php echo $_smarty_tpl->tpl_vars['gimon']->value['text'];?>
+</p>
+      <p class="uk-text-meta uk-margin-remove-top"><time><?php echo $_smarty_tpl->tpl_vars['gimon']->value['created_at'];?>
+</time></p>
     </div>
     <div class="uk-card-footer">
-      <a href="#" class="uk-button uk-button-text">Share with Comment</a>
+      <a href="<?php echo $_smarty_tpl->tpl_vars['WEB']->value;?>
+gimon/tweet/<?php echo $_smarty_tpl->tpl_vars['gimon']->value['id'];?>
+" class="uk-button uk-button-primary">Share with Comment</a>
+      <button class="uk-button uk-button-default uk-icon-link" uk-icon="icon: more" type="button"></button>
+      <div uk-dropdown="mode: click">
+        <ul class="uk-nav uk-dropdown-nav">
+          <!--<li><a href="#">Block this user</a></li>-->
+          <li><a href="<?php echo $_smarty_tpl->tpl_vars['WEB']->value;?>
+gimon/delete/<?php echo $_smarty_tpl->tpl_vars['gimon']->value['id'];?>
+">Delete this gimon</a></li>
+        </ul>
+      </div>
     </div>
   </div>
   <br>
-  <div class="uk-card uk-card-default uk-card-small">
-    <div class="uk-card-body">
-      <p>なんとかなんですか？</p>
-      <p class="uk-text-meta uk-margin-remove-top"><time>2018-01-09 11:21:34</time></p>
-    </div>
-    <div class="uk-card-footer">
-      <a href="#" class="uk-button uk-button-text">Share with Comment</a>
-    </div>
-  </div>
-  <br>
-  <div class="uk-card uk-card-default uk-card-small">
-    <div class="uk-card-body">
-      <p>なんとかなんですか？</p>
-      <p class="uk-text-meta uk-margin-remove-top"><time>2018-01-09 11:21:34</time></p>
-    </div>
-    <div class="uk-card-footer">
-      <a href="#" class="uk-button uk-button-text">Share with Comment</a>
-    </div>
-  </div>
-  <br>
+  <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
 
 
+  <hr>
+  <button uk-toggle="target: #tweet" type="button" class="uk-button uk-button-default">Tweet URL for posting gimons</button>
+  <a href="<?php echo $_smarty_tpl->tpl_vars['WEB']->value;?>
+user/logout" class="uk-button uk-button-danger">Logout</a>
 </div>
+
+<!-- This is the modal -->
+<div id="tweet" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <h2 class="uk-modal-title">Tweet</h2>
+        <form action="" method="post">
+          <textarea name="text" class="uk-textarea" rows="4">
+
+#gimon
+<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
+
+          </textarea>
+          <input type="submit" class="uk-button uk-button-primary uk-margin" value="Tweet">
+          <button class="uk-modal-close uk-button uk-button-danger" type="button">Cancel</button>
+        </form>
+    </div>
+</div>
+
+<?php echo '<script'; ?>
+>
+<?php echo $_smarty_tpl->tpl_vars['script']->value;?>
+
+<?php echo '</script'; ?>
+>
 <?php $_smarty_tpl->_subTemplateRender('file:../template/footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.32-dev-35, created on 2017-12-21 01:52:40
+/* Smarty version 3.1.32-dev-35, created on 2018-01-22 17:08:11
   from 'C:\xampp\htdocs\gimon\view\templates\template\header-b.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.32-dev-35',
-  'unifunc' => 'content_5a3a955809afd9_80555182',
+  'unifunc' => 'content_5a659bebd8c408_27418739',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '4cf04cae20ef096e3ebf716af8270fb211e8ae22' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gimon\\view\\templates\\template\\header-b.tpl',
-      1 => 1513788758,
+      1 => 1516607263,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a3a955809afd9_80555182 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a659bebd8c408_27418739 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,6 +32,9 @@ css/uikit.min.css" />
   <link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['WEB']->value;?>
 css/master.css" />
   <?php echo '<script'; ?>
+ src="http://code.jquery.com/jquery-3.2.1.min.js"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['WEB']->value;?>
 js/uikit.min.js"><?php echo '</script'; ?>
 >
@@ -40,12 +43,13 @@ js/uikit.min.js"><?php echo '</script'; ?>
 js/uikit-icons.min.js"><?php echo '</script'; ?>
 >
 </head>
-<body>
+<body class="uk-background-muted">
   <header class="">
     <nav class="default-primary-color primary-text-color uk-padding" uk-navbar>
       <div class="uk-navbar-left">
         <ul class="uk-navbar-nav">
-          <a class="text-primary-color" href="#" onclick="javascript:window.history.back(-1);return false;" uk-icon="icon:chevron-left; ratio: 1.2"></a>
+          <a class="text-primary-color" href="<?php echo $_smarty_tpl->tpl_vars['back']->value;?>
+" uk-icon="icon:chevron-left; ratio: 1.2"></a>
         </ul>
       </div>
       <div class="uk-navbar-center">

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{$WEB}css/uikit.min.css" />
   <link rel="stylesheet" href="{$WEB}css/master.css" />
+  <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="{$WEB}js/uikit.min.js"></script>
   <script src="{$WEB}js/uikit-icons.min.js"></script>
 </head>
@@ -13,7 +14,7 @@
     <nav class="default-primary-color primary-text-color uk-padding" uk-navbar>
       <div class="uk-navbar-left">
         <ul class="uk-navbar-nav">
-          <a class="text-primary-color" href="#" onclick="javascript:window.history.back(-1);return false;" uk-icon="icon:chevron-left; ratio: 1.2"></a>
+          <a class="text-primary-color" href="{$back}" uk-icon="icon:chevron-left; ratio: 1.2"></a>
         </ul>
       </div>
       <div class="uk-navbar-center">

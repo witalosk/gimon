@@ -17,9 +17,10 @@ class ExceptionCode
     const INVALID_FORM = 1005;
     const INVALID_DATE = 1006;
     const INVALID_DELETE = 1007;
+    const INVALID_USER = 1008;
     const APPLICATION_ERR = 2000;
     const SYSTEM_ERR = 3000;
-    
+
     //メッセージの定義
     static private $_arrMessage = array(
     self::INVALID_ERR => '不正な操作です。',
@@ -30,10 +31,11 @@ class ExceptionCode
     self::INVALID_FORM => '必須項目に空欄があるか、パスワードが一致しません。',
     self::INVALID_DATE => '日付が不正です。',
     self::INVALID_DELETE => '予約が入っている商品は削除できません。',
+    self::INVALID_USER => 'このユーザはこのサービスに登録していません。',
     self::APPLICATION_ERR => 'アプリケーションエラーが発生しました。',
     self::SYSTEM_ERR => 'システムエラーが発生しました。'
     );
-    
+
     /**
     * エラーメッセージを返すメソッド
     * @param  int $intCode エラーコード

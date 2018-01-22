@@ -4,6 +4,8 @@ namespace app\controller;
 
 use \app\model\UserModel;
 use \app\dao\UserDao;
+use \app\dao\GimonDao;
+use \app\controller\GimonController;
 use \app\common\Db;
 use \app\common\InvalidErrorException;
 use \app\common\ExceptionCode;
@@ -25,6 +27,12 @@ class UserController extends ControllerBase
   */
   public function mainAction()
   {
+    //ログインチェック
+    $this::checkLogin();
+
+    $objUm = new UserModel;
+    $objUm = UserController::getLoginUser();
+
     //セッションに入れておいたさっきの配列
     $access_token = $_SESSION['access_token'];
 
@@ -34,6 +42,35 @@ class UserController extends ControllerBase
     //ユーザー情報をGET
     $user = $connection->get("account/verify_credentials");
     $this->view->assign('username', $user->name);
+    $gimons = GimonDao::getDaoFromDestinationId($user->id);
+
+    $this->view->assign('url', WEB_URL.'gimon/add/'.$user->screen_name);
+    $this->view->assign('gimons', $gimons);
+
+    $script = "";
+
+    //POSTされていたらツイートする
+    if(null != $_POST) {
+      //POSTを取得
+      $posts = $this->request->getPost();
+
+      $access_token = $_SESSION['access_token'];
+      $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
+
+      $result = $connection->post(
+        "statuses/update",
+        array("status" => $posts['text'])
+      );
+
+      if($connection->getLastHttpCode() == 200) {
+        // ツイート成功
+        $script = "UIkit.notification('tweeted!', 'success');";
+      } else {
+        // ツイート失敗
+        $script = "UIkit.notification('tweet failed...', 'error');";
+      }
+    }
+    $this->view->assign('script', $script);
   }
 
   /**
@@ -67,7 +104,7 @@ class UserController extends ControllerBase
     $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 
     $user = $connection->get("account/verify_credentials");
-    $id = (int)$user->id;
+    $id = $user->id;
 
     //データベースに存在しなければ登録、する場合ログイン
     $objUM = new UserModel;
@@ -81,7 +118,6 @@ class UserController extends ControllerBase
       Db::transaction();
       $objUM->save();
       Db::commit();
-      $_SESSION[LOGINUSER] = $objUM;
     }
     else
     {
@@ -93,8 +129,8 @@ class UserController extends ControllerBase
       Db::transaction();
       $objUM->register();
       Db::commit();
-      $_SESSION[LOGINUSER] = $objUM;
     }
+    $_SESSION[self::LOGINUSER] = $objUM;
 
     //トップページにリダイレクト
     header( 'location: '.WEB_URL.'user/main' );
@@ -128,18 +164,16 @@ class UserController extends ControllerBase
   */
   static public function checkLogin($redirectURL = '', $redirect = true)
   {
-    global $WEB_URL;
+    $token = (isset($_SESSION['access_token'])) ?
+    $_SESSION['access_token'] : null;
 
-    $objUM = (isset($_SESSION[self::LOGINUSER])) ?
-    $_SESSION[self::LOGINUSER] : null;
-
-    if(isset($objUM))
+    if(isset($token))
     {
       return true;
     }
     if($redirect == true)
     {
-      header('Location:'.$WEB_URL);
+      header('Location:'.WEB_URL);
     }
     else
     {
@@ -164,9 +198,8 @@ class UserController extends ControllerBase
   */
   static public function logoutAction()
   {
-    global $WEB_URL;
     $_SESSION = [];
     session_destroy();
-    header('Location: '.$WEB_URL);
+    header('Location: '.WEB_URL);
   }
 }

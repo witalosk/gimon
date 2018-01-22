@@ -7,6 +7,7 @@ class Dispatcher
 {
   public function dispatch()
   {
+    @session_start();
     // パラメーター取得（末尾の / は削除）
     $param = preg_replace('/\/?$/', '', $_SERVER['REQUEST_URI']);
     $param = trim($param, '/');

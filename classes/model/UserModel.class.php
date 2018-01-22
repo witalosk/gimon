@@ -57,6 +57,17 @@ final class UserModel
     }
 
     /**
+    * screen_nameからユーザモデルを検索するメソッド
+    * @param string $id
+    * @return \app\model\UserModel
+    */
+    public function getModelByScreenName($id)
+    {
+        $dao = UserDao::getDaoFromScreenName($id);
+        return (isset($dao[0])) ? $this->setProperty(reset($dao)) : null;
+    }
+
+    /**
     * DBを更新・DBに保存するメソッド
     * @return bool
     */

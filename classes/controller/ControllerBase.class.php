@@ -10,6 +10,7 @@ abstract class ControllerBase
     protected $view;
     protected $request;
     protected $templatePath;
+    protected $meta ='';
 
     // コンストラクタ
     public function __construct()
@@ -36,8 +37,8 @@ abstract class ControllerBase
             $methodName = sprintf('%sAction', $this->action);
             $this->$methodName();
             //WEB_URLの展開
-            global $WEB_URL;
             $this->view->assign('WEB', WEB_URL);
+            $this->view->assign('meta', $this->meta);
 
             // 表示
             $this->view->display($this->templatePath);

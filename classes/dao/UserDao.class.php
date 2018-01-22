@@ -30,6 +30,24 @@ class UserDao
         $res = Db::select($sql, $arr);
         return $res;
     }
+    /**
+    * ScreenNameから配列を取得する
+    * @param int $userId
+    * @return array
+    */
+    public static function getDaoFromScreenName($sn)
+    {
+        $sql = "SELECT ";
+        $sql .= " * ";
+        $sql .= "FROM `user` ";
+        $sql .= "WHERE `screen_name` = :sn ";
+
+        $arr = array();
+        $arr[':sn'] = $sn;
+
+        $res = Db::select($sql, $arr);
+        return $res;
+    }
 
     /**
     * 更新する

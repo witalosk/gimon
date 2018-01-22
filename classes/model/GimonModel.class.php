@@ -9,6 +9,7 @@ use app\dao\GimonDao;
 final class GimonModel
 {
   public $id = null; //!ID
+  public $destination = null; //!宛先のTwitterID
   public $ipaddress = null; //!質問者のＩＰアドレス
   public $text = null; //!質問内容
   public $created_at = null; //!質問日時
@@ -34,6 +35,7 @@ final class GimonModel
   public function setProperty($array)
   {
     $this->id = $array['id'];
+    $this->destination = $array['destination'];
     $this->ipaddress = $array['ipaddress'];
     $this->text = $array['text'];
     $this->created_at = $array['created_at'];
@@ -62,7 +64,7 @@ final class GimonModel
   }
 
   /**
-  * ユーザを新規登録する
+  * gimonを新規登録する
   *
   * @return bool
   */
@@ -71,5 +73,12 @@ final class GimonModel
     return GimonDao::insert($this);
   }
 
+  /**
+  * gimonを削除する
+  */
+  public function delete()
+  {
+    return GimonDao::delete($this);
+  }
 
 }

@@ -12,50 +12,49 @@ class InvalidErrorException extends \Exception
   public function __construct($code, \Exception $previous = null)
   {
     $message = ExceptionCode::getMessage($code);
-
+    $WEB = WEB_URL;
     //エラーページ生成
     print <<< EOS
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>エラー - WorkingManager</title>
-    <meta name="viewport" content="width=device-width">
-    <style type="text/css">
-    <!--
-@import url(http://fonts.googleapis.com/earlyaccess/notosansjp.css);
-  #wrapper {
-    display: flex;
-    display: -webkit-flex;
-    justify-content: center;
-    justify-content: -webkit-center;
-    padding: 10px; }
-  #wrapper main {
-    display: block;
-    width: 80vw;
-    max-width: 900px;
-    min-width: 300px; }
-  @media screen and (max-width: 1220px) {
-    #wrapper {
-      flex-wrap: wrap; } }
-  @media screen and (min-width: 1220px) {
-    #wrapper {
-      flex-direction: row; } }
-  #wrapper h1 {
-    font-family: 'Noto Sans JP', sans-serif;
-    padding-bottom: 5px;
-    margin-bottom: 0;
-    border-bottom: solid 2px #009cff;
-    font-weight: 300; }
-    -->
-    </style>
-  </head>
-  <body>
-    <div id="wrapper">
-      <main>
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="{$WEB}css/uikit.min.css" />
+      <link rel="stylesheet" href="{$WEB}css/master.css" />
+      <script src="{$WEB}js/uikit.min.js"></script>
+      <script src="{$WEB}js/uikit-icons.min.js"></script>
+    </head>
+    <body class="uk-background-muted">
+      <header class="">
+        <nav class="default-primary-color primary-text-color uk-padding" uk-navbar>
+          <div class="uk-navbar-left">
+            <ul class="uk-navbar-nav">
+              <a class="text-primary-color" href="">gimon</a>
+            </ul>
+          </div>
+          <div class="uk-navbar-center">
+            <ul class="uk-navbar-nav">
+              <li class="uk-logo text-primary-color">Error</li>
+            </ul>
+          </div>
+          <!--
+          <div class="uk-navbar-right">
+            <ul class="uk-navbar-nav">
+              <li class="uk-active"><a href="#">Active</a></li>
+              <li><a href="#">Item</a></li>
+            </ul>
+          </div>
+        -->
+        </nav>
+      </header>
+  <body class="uk-text-center">
+    <div class="uk-container">
+      <main class="uk-text-center">
         <h1>{$message}</h1>
         <p>操作をよくお確かめください。</p>
         <p>{$code}</p>
-        <a href="#" class="btn" onclick="javascript:window.history.back(-1);return false;">戻る</a>
+        <a href="#" class="uk-button uk-button-primary" onclick="javascript:window.history.back(-1);return false;">戻る</a>
       </main>
     </div>
   </body>
