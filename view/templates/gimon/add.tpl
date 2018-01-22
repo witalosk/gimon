@@ -13,5 +13,9 @@
       </form>
     </div>
   </div>
+  <br>
+  <div class="uk-panel">
+    <a class="uk-button uk-button-default"  href="https://twitter.com/hashtag/{$screen_name}Gimon">Check Answers(#{$screen_name}Gimon)</a>
+  </div>
 </div>
 {include file='../template/footer.tpl'}

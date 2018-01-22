@@ -137,6 +137,7 @@ class GimonController extends ControllerBase
     }
     $this->view->assign('username', $params[0]);
     $this->view->assign('name', $objUm->name);
+    $this->view->assign('screen_name', $objUm->screen_name);
     //Twitterカード用
     $this->meta = '
     <meta name="twitter:card" content="summary" />

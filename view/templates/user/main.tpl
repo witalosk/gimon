@@ -23,7 +23,8 @@
   {/foreach}
 
   <hr>
-  <button uk-toggle="target: #tweet" type="button" class="uk-button uk-button-default uk-margin-bottom">Tweet URL for posting gimons</button>
+  <a class="uk-button uk-button-primary uk-margin-bottom"  href="https://twitter.com/hashtag/{$screen_name}Gimon">Check Answers(#{$screen_name}Gimon)</a>
+  <button uk-toggle="target: #tweet" type="button" class="uk-button uk-button-primary uk-margin-bottom">Tweet URL for posting gimons</button>
   <button type="button" class="uk-button uk-button-default uk-margin-bottom" onClick='copyText("{$url}");'>Copy the URL to Clipboard</button>
   <a href="{$WEB}user/logout" class="uk-button uk-button-default uk-margin-bottom">Logout</a>
 </div>
