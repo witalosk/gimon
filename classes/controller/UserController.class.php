@@ -70,6 +70,7 @@ class UserController extends ControllerBase
         $script = "UIkit.notification('tweet failed...', 'error');";
       }
     }
+    $this->view->assign('screen_name', $user->screen_name);
     $this->view->assign('script', $script);
   }
 

@@ -46,7 +46,7 @@ class GimonController extends ControllerBase
 
       $result = $connection->post(
         "statuses/update",
-        array("status" => "Q: {$objGm->text}\nA:{$posts['text']}\n#gimon\n".WEB_URL."gimon/add/{$objUm->screen_name}")
+        array("status" => "Q: {$objGm->text}\nA:{$posts['text']}\n#gimon #gimon{$objUm->screen_name}\n".WEB_URL."gimon/add/{$objUm->screen_name}")
       );
 
       if($connection->getLastHttpCode() == 200) {

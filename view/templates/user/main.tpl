@@ -35,6 +35,7 @@
         <form action="" method="post">
           <textarea name="text" class="uk-textarea" rows="4">
 #gimon
+#{$screen_name}Gimon
 {$url}
           </textarea>
           <input type="submit" class="uk-button uk-button-primary uk-margin" value="Tweet">
