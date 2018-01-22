@@ -24,7 +24,7 @@
 
   <hr>
   <button uk-toggle="target: #tweet" type="button" class="uk-button uk-button-default uk-margin-bottom">Tweet URL for posting gimons</button>
-  <a href="{$WEB}user/logout" class="uk-button uk-button-default">Logout</a>
+  <a href="{$WEB}user/logout" class="uk-button uk-button-default uk-margin-bottom">Logout</a>
 </div>
 
 <!-- This is the modal -->
