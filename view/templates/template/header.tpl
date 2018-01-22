@@ -11,7 +11,7 @@
   <script src="{$WEB}js/uikit-icons.min.js"></script>
   <title>{$title} - gimon</title>
 </head>
-<body class="uk-background-muted">
+<body class="uk-background-muted uk-animation-fade">
   <header class="">
     <nav class="default-primary-color primary-text-color uk-padding" uk-navbar>
       <div class="uk-navbar-left">

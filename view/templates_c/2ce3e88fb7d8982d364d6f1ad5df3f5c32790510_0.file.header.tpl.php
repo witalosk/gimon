@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.32-dev-35, created on 2018-01-22 17:44:58
+/* Smarty version 3.1.32-dev-35, created on 2018-01-22 18:35:55
   from 'C:\xampp\htdocs\gimon\view\templates\template\header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.32-dev-35',
-  'unifunc' => 'content_5a65a48a071ab3_12912400',
+  'unifunc' => 'content_5a65b07b956f16_68463711',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2ce3e88fb7d8982d364d6f1ad5df3f5c32790510' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gimon\\view\\templates\\template\\header.tpl',
-      1 => 1516610687,
+      1 => 1516613207,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a65a48a071ab3_12912400 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a65b07b956f16_68463711 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,7 +47,7 @@ js/uikit-icons.min.js"><?php echo '</script'; ?>
   <title><?php echo $_smarty_tpl->tpl_vars['title']->value;?>
  - gimon</title>
 </head>
-<body class="uk-background-muted">
+<body class="uk-background-muted uk-animation-fade">
   <header class="">
     <nav class="default-primary-color primary-text-color uk-padding" uk-navbar>
       <div class="uk-navbar-left">

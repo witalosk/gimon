@@ -24,6 +24,7 @@
 
   <hr>
   <button uk-toggle="target: #tweet" type="button" class="uk-button uk-button-default uk-margin-bottom">Tweet URL for posting gimons</button>
+  <button type="button" class="uk-button uk-button-default uk-margin-bottom" onClick='copyText("{$url}");'>Copy the URL to Clipboard</button>
   <a href="{$WEB}user/logout" class="uk-button uk-button-default uk-margin-bottom">Logout</a>
 </div>
 
@@ -43,6 +44,17 @@
 </div>
 
 <script>
+{literal}
+function copyText(text){
+	var ta = document.createElement("textarea")
+	ta.value = text
+	document.body.appendChild(ta)
+	ta.select()
+	document.execCommand("copy")
+	ta.parentElement.removeChild(ta)
+  UIkit.notification('Copyed!');
+}
+{/literal}
 {$script}
 </script>
 {include file='../template/footer.tpl'}
