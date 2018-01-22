@@ -42,6 +42,7 @@ class GimonDao
     $sql .= " * ";
     $sql .= "FROM `gimon` ";
     $sql .= "WHERE `destination` = :id ";
+    $sql .= "ORDER BY `id` DESC ";
 
     $arr = array();
     $arr[':id'] = $id;
