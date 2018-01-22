@@ -23,8 +23,8 @@
   {/foreach}
 
   <hr>
-  <button uk-toggle="target: #tweet" type="button" class="uk-button uk-button-default">Tweet URL for posting gimons</button>
-  <a href="{$WEB}user/logout" class="uk-button uk-button-danger">Logout</a>
+  <button uk-toggle="target: #tweet" type="button" class="uk-button uk-button-default uk-margin-bottom">Tweet URL for posting gimons</button>
+  <a href="{$WEB}user/logout" class="uk-button uk-button-default">Logout</a>
 </div>
 
 <!-- This is the modal -->
@@ -33,7 +33,6 @@
         <h2 class="uk-modal-title">Tweet</h2>
         <form action="" method="post">
           <textarea name="text" class="uk-textarea" rows="4">
-
 #gimon
 {$url}
           </textarea>

@@ -8,6 +8,7 @@
   <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="{$WEB}js/uikit.min.js"></script>
   <script src="{$WEB}js/uikit-icons.min.js"></script>
+  <title>{$title} - gimon</title>
 </head>
 <body class="uk-background-muted">
   <header class="">

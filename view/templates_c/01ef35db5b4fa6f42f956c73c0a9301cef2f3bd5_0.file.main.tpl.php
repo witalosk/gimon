@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.32-dev-35, created on 2018-01-22 17:34:35
+/* Smarty version 3.1.32-dev-35, created on 2018-01-22 17:43:53
   from 'C:\xampp\htdocs\gimon\view\templates\user\main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.32-dev-35',
-  'unifunc' => 'content_5a65a21bc95d20_72775691',
+  'unifunc' => 'content_5a65a449ec4d21_38603789',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '01ef35db5b4fa6f42f956c73c0a9301cef2f3bd5' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gimon\\view\\templates\\user\\main.tpl',
-      1 => 1516610073,
+      1 => 1516610631,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../template/footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a65a21bc95d20_72775691 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a65a449ec4d21_38603789 (Smarty_Internal_Template $_smarty_tpl) {
 ob_start();
 echo $_smarty_tpl->tpl_vars['WEB']->value;
 $_prefixVariable1 = ob_get_clean();
@@ -71,9 +71,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
 
 
   <hr>
-  <button uk-toggle="target: #tweet" type="button" class="uk-button uk-button-default">Tweet URL for posting gimons</button>
+  <button uk-toggle="target: #tweet" type="button" class="uk-button uk-button-default uk-margin-bottom">Tweet URL for posting gimons</button>
   <a href="<?php echo $_smarty_tpl->tpl_vars['WEB']->value;?>
-user/logout" class="uk-button uk-button-danger">Logout</a>
+user/logout" class="uk-button uk-button-default">Logout</a>
 </div>
 
 <!-- This is the modal -->
@@ -82,7 +82,6 @@ user/logout" class="uk-button uk-button-danger">Logout</a>
         <h2 class="uk-modal-title">Tweet</h2>
         <form action="" method="post">
           <textarea name="text" class="uk-textarea" rows="4">
-
 #gimon
 <?php echo $_smarty_tpl->tpl_vars['url']->value;?>
 
