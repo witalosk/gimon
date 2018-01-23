@@ -18,6 +18,7 @@ class ExceptionCode
     const INVALID_DATE = 1006;
     const INVALID_DELETE = 1007;
     const INVALID_USER = 1008;
+
     const APPLICATION_ERR = 2000;
     const SYSTEM_ERR = 3000;
 
@@ -28,7 +29,7 @@ class ExceptionCode
     self::INVALID_LOGIN_FAIL => 'ログインに失敗しました。',
     self::INVALID_URL => 'ページが存在しません。',
     self::INVALID_PICTURE => '画像が不正です。',
-    self::INVALID_FORM => '必須項目に空欄があるか、パスワードが一致しません。',
+    self::INVALID_FORM => '送信されたデータのサイズが大きすぎます。',
     self::INVALID_DATE => '日付が不正です。',
     self::INVALID_DELETE => '予約が入っている商品は削除できません。',
     self::INVALID_USER => 'このユーザはこのサービスに登録していません。',

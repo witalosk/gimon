@@ -120,6 +120,11 @@ class GimonController extends ControllerBase
     {
       //POSTを取得
       $posts = $this->request->getPost();
+      //textが280バイト以上の場合、エラーを吐く
+      if(strlen($posts['text']) > 280) {
+        throw new InvalidErrorException(ExceptionCode::INVALID_FORM);  
+      }
+
       //疑問を作成
       $objGm = new GimonModel;
       $objGm->destination = $objUm->id;
