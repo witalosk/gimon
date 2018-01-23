@@ -8,6 +8,7 @@ use app\model\UserModel;
 use app\controller\UserController;
 use app\model\GimonModel;
 use app\dao\GimonDao;
+use app\dao\BadWordsDao;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
 
@@ -122,7 +123,7 @@ class GimonController extends ControllerBase
       $posts = $this->request->getPost();
       //textが280バイト以上の場合、エラーを吐く
       if(strlen($posts['text']) > 280) {
-        throw new InvalidErrorException(ExceptionCode::INVALID_FORM);  
+        throw new InvalidErrorException(ExceptionCode::INVALID_FORM);
       }
 
       //疑問を作成
@@ -168,5 +169,21 @@ class GimonController extends ControllerBase
       array_push($result, $objGm);
     }
     return $result;
+  }
+
+  /**
+  * 悪意のある言葉チェック
+  */
+  public static function checkBadWords($text)
+  {
+    $score = 0; //!悪意スコア
+    $array = BadWordsDao::getDao();
+    foreach ($array as $word) {
+      if(strpos($text, $word['word']) !== false) {
+        $score += $word['degree'];
+      }
+    }
+
+    return $score;
   }
 }

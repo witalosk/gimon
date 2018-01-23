@@ -42,7 +42,25 @@ class UserController extends ControllerBase
     //ユーザー情報をGET
     $user = $connection->get("account/verify_credentials");
     $this->view->assign('username', $user->name);
+
+    //疑問一覧を取得
     $gimons = GimonDao::getDaoFromDestinationId($user->id);
+    //悪意のある言葉チェック
+    foreach ($gimons as $key => $gimon) {
+      $score = GimonController::checkBadWords($gimon['text']);
+      if($score >= 10) {
+        $gimons[$key]['text'] =
+        '<p class="uk-label uk-label-danger">This may contain very malicious words.<br>強い悪意のある言葉が含まれる可能性</p>
+        <button class="uk-button uk-button-default uk-button-small" type="button" uk-toggle="target: #text'.$key.'">SHOW 表示</button>
+        <p hidden id="text'.$key.'">'.$gimons[$key]['text'].'</p>';
+      }
+      else if($score >= 5) {
+        $gimons[$key]['text'] =
+        '<p class="uk-label uk-label-warning">This may contain malicious words.<br>悪意のある言葉が含まれる可能性</p>
+        <button class="uk-button uk-button-default uk-button-small" type="button" uk-toggle="target: #text'.$key.'">SHOW 表示</button>
+        <p hidden id="text'.$key.'">'.$gimons[$key]['text'].'</p>';
+      }
+    }
 
     $this->view->assign('url', WEB_URL.'gimon/add/'.$user->screen_name);
     $this->view->assign('gimons', $gimons);

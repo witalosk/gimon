@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.32-dev-35, created on 2018-01-22 19:22:47
+/* Smarty version 3.1.32-dev-35, created on 2018-01-23 14:21:35
   from 'C:\xampp\htdocs\gimon\view\templates\user\main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.32-dev-35',
-  'unifunc' => 'content_5a65bb7767aa00_71075505',
+  'unifunc' => 'content_5a66c65fb9d9f0_18487764',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '01ef35db5b4fa6f42f956c73c0a9301cef2f3bd5' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gimon\\view\\templates\\user\\main.tpl',
-      1 => 1516616565,
+      1 => 1516616841,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../template/footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a65bb7767aa00_71075505 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a66c65fb9d9f0_18487764 (Smarty_Internal_Template $_smarty_tpl) {
 ob_start();
 echo $_smarty_tpl->tpl_vars['WEB']->value;
 $_prefixVariable1 = ob_get_clean();
@@ -71,7 +71,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
 
 
   <hr>
-  <a class="uk-button uk-button-secondary uk-margin-bottom"  href="https://twitter.com/hashtag/<?php echo $_smarty_tpl->tpl_vars['screen_name']->value;?>
+  <a class="uk-button uk-button-primary uk-margin-bottom"  href="https://twitter.com/hashtag/<?php echo $_smarty_tpl->tpl_vars['screen_name']->value;?>
 Gimon">Check Answers(#<?php echo $_smarty_tpl->tpl_vars['screen_name']->value;?>
 Gimon)</a>
   <button uk-toggle="target: #tweet" type="button" class="uk-button uk-button-primary uk-margin-bottom">Tweet URL for posting gimons</button>
