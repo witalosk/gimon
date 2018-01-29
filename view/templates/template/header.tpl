@@ -6,8 +6,7 @@
   {$meta}
   <link rel="stylesheet" href="{$WEB}css/uikit.min.css" />
   <link rel="stylesheet" href="{$WEB}css/master.css" />
-  <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script src="{$WEB}js/uikit.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>  <script src="{$WEB}js/uikit.min.js"></script>
   <script src="{$WEB}js/uikit-icons.min.js"></script>
   <title>{$title} - gimon</title>
 </head>
