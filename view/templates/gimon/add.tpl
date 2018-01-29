@@ -15,7 +15,7 @@
   </div>
   <br>
   <div class="uk-panel">
-    <a class="uk-button uk-button-default"  href="https://twitter.com/hashtag/{$screen_name}Gimon">Check Answers(#{$screen_name}Gimon)</a>
+    <a class="uk-button uk-button-default"  href="{$WEB}">Sign up / Sign in<br><span class="uk-text-meta">新規登録 / ログイン</span></a>
   </div>
 </div>
 {include file='../template/footer.tpl'}

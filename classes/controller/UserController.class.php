@@ -4,6 +4,7 @@ namespace app\controller;
 
 use \app\model\UserModel;
 use \app\dao\UserDao;
+use \app\model\GimonModel;
 use \app\dao\GimonDao;
 use \app\controller\GimonController;
 use \app\common\Db;
@@ -43,22 +44,31 @@ class UserController extends ControllerBase
     $user = $connection->get("account/verify_credentials");
     $this->view->assign('username', $user->name);
 
+    //ブロックリストを取得
+    $blocklist = explode(';',$objUm->blocklist);
+
+
     //疑問一覧を取得
     $gimons = GimonDao::getDaoFromDestinationId($user->id);
-    //悪意のある言葉チェック
+    //悪意のある言葉チェック & ブロックチェック
     foreach ($gimons as $key => $gimon) {
-      $score = GimonController::checkBadWords($gimon['text']);
-      if($score >= 10) {
-        $gimons[$key]['text'] =
-        '<p class="uk-label uk-label-danger">This may contain very malicious words.<br>強い悪意のある言葉が含まれる可能性</p>
-        <button class="uk-button uk-button-default uk-button-small" type="button" uk-toggle="target: #text'.$key.'">SHOW 表示</button>
-        <p hidden id="text'.$key.'">'.$gimons[$key]['text'].'</p>';
+      if(!in_array($gimon['ipaddress'], $blocklist)){
+        $score = GimonController::checkBadWords($gimon['text']);
+        if($score >= 10) {
+          $gimons[$key]['text'] =
+          '<p class="uk-label uk-label-danger">This may contain very malicious words.<br>強い悪意のある言葉が含まれる可能性</p>
+          <button class="uk-button uk-button-default uk-button-small" type="button" uk-toggle="target: #text'.$key.'">SHOW 表示</button>
+          <p hidden id="text'.$key.'">'.$gimons[$key]['text'].'</p>';
+        }
+        else if($score >= 5) {
+          $gimons[$key]['text'] =
+          '<p class="uk-label uk-label-warning">This may contain malicious words.<br>悪意のある言葉が含まれる可能性</p>
+          <button class="uk-button uk-button-default uk-button-small" type="button" uk-toggle="target: #text'.$key.'">SHOW 表示</button>
+          <p hidden id="text'.$key.'">'.$gimons[$key]['text'].'</p>';
+        }
       }
-      else if($score >= 5) {
-        $gimons[$key]['text'] =
-        '<p class="uk-label uk-label-warning">This may contain malicious words.<br>悪意のある言葉が含まれる可能性</p>
-        <button class="uk-button uk-button-default uk-button-small" type="button" uk-toggle="target: #text'.$key.'">SHOW 表示</button>
-        <p hidden id="text'.$key.'">'.$gimons[$key]['text'].'</p>';
+      else {
+        unset($gimons[$key]);
       }
     }
 
@@ -90,6 +100,43 @@ class UserController extends ControllerBase
     }
     $this->view->assign('screen_name', $user->screen_name);
     $this->view->assign('script', $script);
+  }
+
+  /**
+  * ブロック処理
+  */
+  public function blockAction()
+  {
+    //postを受け取り
+    $posts = $this->request->getPost();
+
+    if(null == $posts['id']) {
+      throw new InvalidErrorException(ExceptionCode::INVALID_URL);
+    }
+
+    $objUm = new UserModel(); //ユーザモデル
+    $objUm = UserController::getLoginUser();
+
+    //ぎもんIDからIPアドレスを検索
+    $objGm = new GimonModel();
+    $objGm->getModelById($posts['id']);
+
+    //ブロックリストを配列に
+    $blocklist = explode(';',$objUm->blocklist);
+    //ブロックリストに追加
+    array_push($blocklist, $objGm->ipaddress);
+
+    $strblocklist = implode(';', $blocklist);
+    $objUm->blocklist = $strblocklist;
+    $objUm->updated_at = date('Y/m/d H:i:s');
+
+    //DBを更新
+    Db::transaction();
+    $objUm->save();
+    Db::commit();
+
+    $_SESSION[self::LOGINUSER] = $objUm;
+    $this->view->assign('back', WEB_URL.'user/main');
   }
 
   /**
