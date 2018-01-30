@@ -182,7 +182,7 @@ class GimonController extends ControllerBase
 
       $result = $twitter->post(
         "direct_messages/new",
-        array("user_id" => $objUm->id, "text" => "A gimon for you has been posted.\nあなた宛てのgimonが投稿されました。\n".WEB_URL."gimon/add/".$objUm->screen_name)
+        array("user_id" => $objUm->id, "text" => "A gimon for you has been posted.\nあなた宛てのgimonが投稿されました。\n".WEB_URL)
       );
 
       //Templateパスを変更
