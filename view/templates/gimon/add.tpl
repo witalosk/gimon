@@ -3,7 +3,7 @@
   <br>
   <div class="uk-card uk-card-default uk-card-small">
     <div class="uk-card-header">
-      <h3>Gimon to {$username}</h3>
+      <h3>Gimon for {$username}</h3>
       <p class="uk-text-meta">{$name}</p>
     </div>
     <div class="uk-card-body">

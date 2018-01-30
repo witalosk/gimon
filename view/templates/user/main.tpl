@@ -1,10 +1,32 @@
 {include file='../template/header.tpl' title='Gimons' WEB={$WEB}}
+<!-- menu -->
+<div class="uk-offcanvas-content">
+    <div id="offcanvas-flip" uk-offcanvas="flip: true; overlay: false">
+        <div class="uk-offcanvas-bar">
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+            <h3>Menu</h3>
+            <div id="menu">
+              <button uk-toggle="target: #tweet" type="button" class="uk-button uk-button-primary uk-margin-bottom uk-width-1-1">Tweet my URL</button>
+              <button type="button" class="uk-button uk-button-default uk-margin-bottom uk-width-1-1" onClick='copyText("{$url}");'>Copy my URL to Clipboard</button>
+              <a href="{$WEB}user/logout" class="uk-button uk-button-default uk-margin-bottom uk-width-1-1">Logout</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="uk-position-fixed uk-position-medium uk-position-top-right">
+  <button class="uk-button uk-button-primary uk-light default-primary-color" type="button" uk-toggle="target: #offcanvas-flip">Menu</button>
+</div>
 <div class="uk-container uk-text-center">
   <h3 class="uk-margin-top">Gimons for {$username}</h3>
-  <p>Your URL for posting gimons: <a href="{$url}" class="uk-button uk-button-text">{$url}</a>　　<a href="#menu" class="uk-button uk-button-default" uk-scroll>To bottom</a></p>
+  <p>Your URL to post gimons: <a href="{$url}" class="uk-button uk-button-text">{$url}</a></p>
+  <p>DMで通知を受け取るには <a href="https://twitter.com/gimon_noyatsu">@gimon_noyatsu をフォロー</a>しなければいけません。<br>
+  <span class="ms-mini">You must <a href="https://twitter.com/gimon_noyatsu">follow @gimon_noyatsu</a> to receive notifications in DM.</span></p>
+
   {foreach from=$gimons item=gimon}
   <div class="uk-card uk-card-default uk-card-small">
     <div class="uk-card-body">
+      {$gimon.answer}
       <p>{$gimon.text}</p>
       <p class="uk-text-meta uk-margin-remove-top"><time>{$gimon.created_at}</time></p>
     </div>
@@ -30,17 +52,10 @@
   <br>
   {/foreach}
 
-  <hr>
-  <div id="menu">
-    <button uk-toggle="target: #tweet" type="button" class="uk-button uk-button-primary uk-margin-bottom">Tweet URL for posting gimons</button>
-    <button type="button" class="uk-button uk-button-default uk-margin-bottom" onClick='copyText("{$url}");'>Copy the URL to Clipboard</button>
-    <a href="{$WEB}user/logout" class="uk-button uk-button-default uk-margin-bottom">Logout</a>
-  </div>
   <br>
   <a href="#" uk-totop uk-scroll></a>
   <br>
 </div>
-
 
 <!-- This is the modal -->
 <div id="tweet" uk-modal>

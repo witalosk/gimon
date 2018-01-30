@@ -13,6 +13,16 @@
       </form>
     </div>
   </div>
+  <br>
+  <div class="uk-card uk-card-default uk-card-small">
+    <div class="uk-card-header">
+      <h3>あなたの回答ツイート</h3>
+      <p class="ms-mini">Your answer tweet</p>
+    </div>
+    <div class="uk-card-body">
+      {$answer}
+    </div>
+  </div>
 </div>
 <script>
 {$script}

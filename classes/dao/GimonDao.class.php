@@ -62,14 +62,15 @@ class GimonDao
     $sql .= "`destination`= :destination, ";
     $sql .= "`ipaddress`= :ipaddress, ";
     $sql .= "`text`= :text, ";
+    $sql .= "`answer`= :answer, ";
     $sql .= "`created_at`= :created_at ";
     $sql .= "WHERE `id` = :id ";
 
     $arr = array();
-    $arr[':name'] = $objGM->name;
     $arr[':destination'] = $objGM->destination;
     $arr[':ipaddress'] = $objGM->ipaddress;
     $arr[':text'] = $objGM->text;
+    $arr[':answer'] = $objGM->answer;
     $arr[':created_at'] = $objGM->created_at;
     $arr[':id'] = $objGM->id;
 
@@ -87,6 +88,7 @@ class GimonDao
     $sql .= ", :destination ";
     $sql .= ", :ipaddress ";
     $sql .= ", :text ";
+    $sql .= ", :answer ";
     $sql .= ", :created_at ";
     $sql .= ")";
 
@@ -95,6 +97,7 @@ class GimonDao
     $arr[':destination'] = $objGM->destination;
     $arr[':ipaddress'] = $objGM->ipaddress;
     $arr[':text'] = $objGM->text;
+    $arr[':answer'] = $objGM->answer;
     $arr[':created_at'] = $objGM->created_at;
 
     return Db::insert($sql, $arr);

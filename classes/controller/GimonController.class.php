@@ -37,17 +37,37 @@ class GimonController extends ControllerBase
       throw new InvalidErrorException(ExceptionCode::INVALID_URL);
     }
 
+    //Twitter
+    $access_token = $_SESSION['access_token'];
+    $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
+
+    //過去の回答を取得
+    if(null != $objGm->answer)
+    {
+      $result_tweet = $connection->get(
+        "statuses/show",
+        array("id" => $objGm->answer)
+      );
+      if(isset($result_tweet->text)) {
+        $answer = nl2br($result_tweet->text);
+      }
+      else {
+        $answer = "どうやらあなたは回答のツイートを削除したようです。/ The answer tweet has been deleted.";
+      }
+    }
+    else {
+      $answer = "過去のツイートはありません。 / There are no answer.";
+    }
+
+
     //ツイートする
     if(null != $_POST) {
       //POSTを取得
       $posts = $this->request->getPost();
 
-      $access_token = $_SESSION['access_token'];
-      $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
-
       $result = $connection->post(
         "statuses/update",
-        array("status" => "Q: {$objGm->text}\nA:{$posts['text']}\n#gimon #gimon{$objUm->screen_name}\n".WEB_URL."gimon/add/{$objUm->screen_name}")
+        array("status" => "Q: {$objGm->text}\nA: {$posts['text']}\n#gimon #gimon{$objUm->screen_name}\n".WEB_URL."gimon/add/{$objUm->screen_name}")
       );
 
       if($connection->getLastHttpCode() == 200) {
@@ -57,11 +77,18 @@ class GimonController extends ControllerBase
         // ツイート失敗
         $script = "UIkit.notification('tweet failed...', 'error');";
       }
+      //答えのツイートを記憶
+      $objGm->answer = $result->id;
 
+      //DBをアップデート
+      Db::transaction();
+      $objGm->save();
+      Db::commit();
     }
 
     $this->view->assign('gimon', (array)$objGm);
     $this->view->assign('script', $script);
+    $this->view->assign('answer', $answer);
     $this->view->assign('back', WEB_URL.'user/main');
   }
 
@@ -145,12 +172,11 @@ class GimonController extends ControllerBase
       $accessToken_a = "958208809876377600-ZlZBM7gK3uh2eP3fW2GfupjqRMxTxii";
       $accessTokenSecret_a = "cb5i8uDKLhVYmeFCAmCQdaXfQHjTh9blbRrcOUARaSLyN";
 
-      $twitter = new TwitterOAuth($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
+      $twitter = new TwitterOAuth($consumerKey_a, $consumerSecret_a, $accessToken_a, $accessTokenSecret_a);
 
       $result = $twitter->post(
         "direct_messages/new",
-        array("user_id" => $objUm->id, "text" => "A gimon for you has been posted.\nあなた宛てのgimonが投稿されました。\n
-        ".WEB_URL."gimon/add/".$objUm->screen_name)
+        array("user_id" => $objUm->id, "text" => "A gimon for you has been posted.\nあなた宛てのgimonが投稿されました。\n".WEB_URL."gimon/add/".$objUm->screen_name)
       );
 
       //Templateパスを変更

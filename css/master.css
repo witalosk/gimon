@@ -12,9 +12,14 @@
 /* master */
 body{
   min-height: 100vh;
+  line-height: 1.5;
 }
 
 input[type="submit"], button {
 -webkit-appearance: none;
 border-radius: 0;
+}
+
+.ms-mini {
+  font-size: 0.75em;
 }

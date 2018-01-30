@@ -57,14 +57,19 @@ class UserController extends ControllerBase
         if($score >= 10) {
           $gimons[$key]['text'] =
           '<p class="uk-label uk-label-danger">This may contain very malicious words.<br>強い悪意のある言葉が含まれる可能性</p>
-          <button class="uk-button uk-button-default uk-button-small" type="button" uk-toggle="target: #text'.$key.'">SHOW 表示</button>
+          <button class="uk-button uk-button-default uk-button-small" type="button" uk-toggle="target: #text'.$key.'">SHOW / 表示</button>
           <p hidden id="text'.$key.'">'.$gimons[$key]['text'].'</p>';
         }
         else if($score >= 5) {
           $gimons[$key]['text'] =
           '<p class="uk-label uk-label-warning">This may contain malicious words.<br>悪意のある言葉が含まれる可能性</p>
-          <button class="uk-button uk-button-default uk-button-small" type="button" uk-toggle="target: #text'.$key.'">SHOW 表示</button>
+          <button class="uk-button uk-button-default uk-button-small" type="button" uk-toggle="target: #text'.$key.'">SHOW / 表示</button>
           <p hidden id="text'.$key.'">'.$gimons[$key]['text'].'</p>';
+        }
+
+        //answerをタグに変更
+        if(null != $gimon['answer']) {
+          $gimons[$key]['answer'] = '<p class="uk-label uk-label-default">Answered</p>';
         }
       }
       else {

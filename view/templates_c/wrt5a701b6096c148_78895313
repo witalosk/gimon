@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.32-dev-35, created on 2018-01-30 18:08:19
+/* Smarty version 3.1.32-dev-35, created on 2018-01-30 16:14:40
   from 'C:\xampp\htdocs\gimon\view\templates\user\main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.32-dev-35',
-  'unifunc' => 'content_5a7036039eac92_83555541',
+  'unifunc' => 'content_5a701b60962aa2_03728122',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '01ef35db5b4fa6f42f956c73c0a9301cef2f3bd5' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gimon\\view\\templates\\user\\main.tpl',
-      1 => 1517303286,
+      1 => 1517292306,
       2 => 'file',
     ),
   ),
@@ -22,42 +22,19 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../template/footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a7036039eac92_83555541 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a701b60962aa2_03728122 (Smarty_Internal_Template $_smarty_tpl) {
 ob_start();
 echo $_smarty_tpl->tpl_vars['WEB']->value;
 $_prefixVariable1 = ob_get_clean();
 $_smarty_tpl->_subTemplateRender('file:../template/header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('title'=>'Gimons','WEB'=>$_prefixVariable1), 0, false);
 ?>
 
-<!-- menu -->
-<div class="uk-offcanvas-content">
-    <div id="offcanvas-flip" uk-offcanvas="flip: true; overlay: false">
-        <div class="uk-offcanvas-bar">
-            <button class="uk-offcanvas-close" type="button" uk-close></button>
-            <h3>Menu</h3>
-            <div id="menu">
-              <button uk-toggle="target: #tweet" type="button" class="uk-button uk-button-primary uk-margin-bottom uk-width-1-1">Tweet my URL</button>
-              <button type="button" class="uk-button uk-button-default uk-margin-bottom uk-width-1-1" onClick='copyText("<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
-");'>Copy my URL to Clipboard</button>
-              <a href="<?php echo $_smarty_tpl->tpl_vars['WEB']->value;?>
-user/logout" class="uk-button uk-button-default uk-margin-bottom uk-width-1-1">Logout</a>
-            </div>
-        </div>
-    </div>
-
-</div>
-<div class="uk-position-fixed uk-position-medium uk-position-top-right">
-  <button class="uk-button uk-button-primary uk-light default-primary-color" type="button" uk-toggle="target: #offcanvas-flip">Menu</button>
-</div>
 <div class="uk-container uk-text-center">
   <h3 class="uk-margin-top">Gimons for <?php echo $_smarty_tpl->tpl_vars['username']->value;?>
 </h3>
-  <p>Your URL to post gimons: <a href="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
+  <p>Your URL for posting gimons: <a href="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
 " class="uk-button uk-button-text"><?php echo $_smarty_tpl->tpl_vars['url']->value;?>
-</a></p>
-  <p>DMで通知を受け取るには <a href="https://twitter.com/gimon_noyatsu">@gimon_noyatsu をフォロー</a>しなければいけません。<br>
-  <span class="ms-mini">You must <a href="https://twitter.com/gimon_noyatsu">follow @gimon_noyatsu</a> to receive notifications in DM.</span></p>
-
+</a>　　<a href="#menu" class="uk-button uk-button-default" uk-scroll>To bottom</a></p>
   <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['gimons']->value, 'gimon');
 if ($_from !== null) {
@@ -65,8 +42,6 @@ foreach ($_from as $_smarty_tpl->tpl_vars['gimon']->value) {
 ?>
   <div class="uk-card uk-card-default uk-card-small">
     <div class="uk-card-body">
-      <?php echo $_smarty_tpl->tpl_vars['gimon']->value['answer'];?>
-
       <p><?php echo $_smarty_tpl->tpl_vars['gimon']->value['text'];?>
 </p>
       <p class="uk-text-meta uk-margin-remove-top"><time><?php echo $_smarty_tpl->tpl_vars['gimon']->value['created_at'];?>
@@ -109,10 +84,20 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
 ?>
 
 
+  <hr>
+  <p>You must follow @ gimon_noyatsu to receive notifications in DM. / DMで通知を受け取るには @gimon_noyatsu をフォローしなければいけません。</p>
+  <div id="menu">
+    <button uk-toggle="target: #tweet" type="button" class="uk-button uk-button-primary uk-margin-bottom">Tweet URL for posting gimons</button>
+    <button type="button" class="uk-button uk-button-default uk-margin-bottom" onClick='copyText("<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
+");'>Copy the URL to Clipboard</button>
+    <a href="<?php echo $_smarty_tpl->tpl_vars['WEB']->value;?>
+user/logout" class="uk-button uk-button-default uk-margin-bottom">Logout</a>
+  </div>
   <br>
   <a href="#" uk-totop uk-scroll></a>
   <br>
 </div>
+
 
 <!-- This is the modal -->
 <div id="tweet" uk-modal>

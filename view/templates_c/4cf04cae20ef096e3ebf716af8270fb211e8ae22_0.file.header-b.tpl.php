@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.32-dev-35, created on 2018-01-29 10:08:40
+/* Smarty version 3.1.32-dev-35, created on 2018-01-30 16:59:26
   from 'C:\xampp\htdocs\gimon\view\templates\template\header-b.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.32-dev-35',
-  'unifunc' => 'content_5a6e74188eff73_00130348',
+  'unifunc' => 'content_5a7025ded574c0_71153600',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '4cf04cae20ef096e3ebf716af8270fb211e8ae22' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gimon\\view\\templates\\template\\header-b.tpl',
-      1 => 1517188062,
+      1 => 1517291630,
       2 => 'file',
     ),
   ),
@@ -20,21 +20,28 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a6e74188eff73_00130348 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a7025ded574c0_71153600 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@gimon_noyatsu" />
+  <meta property="og:url" content="<?php echo $_smarty_tpl->tpl_vars['WEB']->value;?>
+" />
+  <meta property="og:title" content="gimon.noyatsu" />
+  <meta property="og:description" content="Answer questions from your follower." />
+  <meta property="og:image" content="<?php echo $_smarty_tpl->tpl_vars['WEB']->value;?>
+logo.PNG" />
   <link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['WEB']->value;?>
 css/uikit.min.css" />
   <link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['WEB']->value;?>
 css/master.css" />
   <?php echo '<script'; ?>
- src="http://code.jquery.com/jquery-3.2.1.min.js"><?php echo '</script'; ?>
->
-  <?php echo '<script'; ?>
+ src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"><?php echo '</script'; ?>
+>  <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['WEB']->value;?>
 js/uikit.min.js"><?php echo '</script'; ?>
 >

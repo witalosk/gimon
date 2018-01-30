@@ -12,6 +12,7 @@ final class GimonModel
   public $destination = null; //!宛先のTwitterID
   public $ipaddress = null; //!質問者のＩＰアドレス
   public $text = null; //!質問内容
+  public $answer = null; //!回答TweetID
   public $created_at = null; //!質問日時
 
   /**
@@ -38,6 +39,7 @@ final class GimonModel
     $this->destination = $array['destination'];
     $this->ipaddress = $array['ipaddress'];
     $this->text = $array['text'];
+    $this->answer = $array['answer'];
     $this->created_at = $array['created_at'];
 
     return $this;
