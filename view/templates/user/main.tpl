@@ -14,7 +14,7 @@
     </div>
 
 </div>
-<div class="uk-position-fixed uk-position-medium uk-position-top-right">
+<div class="uk-position-fixed uk-position-medium uk-position-top-right ms-z999">
   <button class="uk-button uk-button-primary uk-light default-primary-color" type="button" uk-toggle="target: #offcanvas-flip">Menu</button>
 </div>
 <div class="uk-container uk-text-center">
@@ -92,14 +92,12 @@
 function copyText(text){
   var ta = document.createElement("textarea")
   ta.value = text
-  document.body.appendChild(ta)
+  $('#menu').append(ta)
   ta.select()
   document.execCommand("copy")
   ta.parentElement.removeChild(ta)
   UIkit.notification('Copyed!');
 }
-
-
 {/literal}
 {$script}
 </script>

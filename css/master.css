@@ -23,3 +23,7 @@ border-radius: 0;
 .ms-mini {
   font-size: 0.75em;
 }
+
+.ms-z999 {
+  z-index: 999;
+}
