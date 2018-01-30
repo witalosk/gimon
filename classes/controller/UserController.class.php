@@ -107,6 +107,9 @@ class UserController extends ControllerBase
   */
   public function blockAction()
   {
+    //ログインチェック
+    $this::checkLogin();
+
     //postを受け取り
     $posts = $this->request->getPost();
 

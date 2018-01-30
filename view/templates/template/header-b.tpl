@@ -3,6 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@gimon_noyatsu" />
+  <meta property="og:url" content="{$WEB}" />
+  <meta property="og:title" content="gimon.noyatsu" />
+  <meta property="og:description" content="Answer questions from your follower." />
+  <meta property="og:image" content="{$WEB}logo.PNG" />
   <link rel="stylesheet" href="{$WEB}css/uikit.min.css" />
   <link rel="stylesheet" href="{$WEB}css/master.css" />
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>  <script src="{$WEB}js/uikit.min.js"></script>

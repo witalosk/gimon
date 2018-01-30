@@ -138,6 +138,21 @@ class GimonController extends ControllerBase
       $objGm->register();
       Db::commit();
 
+      //DMを送信
+      //gimon_admin
+      $consumerKey_a = "HDgu0CCr6p9zQcSWFMpBweJ6K";
+      $consumerSecret_a = "4bAu7EqtiHlPsgw8kGyG2hphxxDWRHMTseCGBfKUa93X3EHew0";
+      $accessToken_a = "958208809876377600-ZlZBM7gK3uh2eP3fW2GfupjqRMxTxii";
+      $accessTokenSecret_a = "cb5i8uDKLhVYmeFCAmCQdaXfQHjTh9blbRrcOUARaSLyN";
+
+      $twitter = new TwitterOAuth($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
+
+      $result = $twitter->post(
+        "direct_messages/new",
+        array("user_id" => $objUm->id, "text" => "A gimon for you has been posted.\nあなた宛てのgimonが投稿されました。\n
+        ".WEB_URL."gimon/add/".$objUm->screen_name)
+      );
+
       //Templateパスを変更
       $this->templatePath="gimon/added.tpl";
     }
