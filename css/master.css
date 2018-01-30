@@ -27,3 +27,6 @@ border-radius: 0;
 .ms-z999 {
   z-index: 9999999;
 }
+.ms-z9999 {
+  z-index: 99999999;
+}

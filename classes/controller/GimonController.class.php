@@ -19,6 +19,9 @@ class GimonController extends ControllerBase
   * @brief 質問をシェアするアクション
   */
   public function tweetAction() {
+    //ログインチェック
+    UserController::checkLogin();
+
     $objUm = new UserModel;
     $objUm = UserController::getLoginUser();
     $script = "";
@@ -97,6 +100,9 @@ class GimonController extends ControllerBase
   * @brief 質問を削除するアクション
   */
   public function deleteAction() {
+    //ログインチェック
+    UserController::checkLogin();
+
     $objUm = new UserModel;
     $objUm = UserController::getLoginUser();
     $script = "";

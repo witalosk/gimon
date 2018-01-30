@@ -1,7 +1,7 @@
 {include file='../template/header.tpl' title='Gimons' WEB={$WEB}}
 <!-- menu -->
 <div class="uk-offcanvas-content">
-    <div id="offcanvas-flip" uk-offcanvas="flip: true; overlay: false">
+    <div id="offcanvas-flip" uk-offcanvas="flip: true; overlay: false" class="ms-z9999">
         <div class="uk-offcanvas-bar">
             <button class="uk-offcanvas-close" type="button" uk-close></button>
             <h3>Menu</h3>
