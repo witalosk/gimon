@@ -183,7 +183,7 @@ class GimonController extends ControllerBase
       if($this::checkBadWords($objGm->text) >= 5) {
         $result = $twitter->post(
           "direct_messages/new",
-          array("user_id" => $objUm->id, "text" => "A gimon for you has been posted.\nあなた宛てのgimonが投稿されました。\n".WEB_URL)
+          array("user_id" => $objUm->id, "text" => "A gimon for you has been posted.\nあなた宛てのgimonが投稿されました。\n[非表示]\n".WEB_URL)
         );
       }
       else {
