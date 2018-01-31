@@ -180,10 +180,20 @@ class GimonController extends ControllerBase
 
       $twitter = new TwitterOAuth($consumerKey_a, $consumerSecret_a, $accessToken_a, $accessTokenSecret_a);
 
-      $result = $twitter->post(
-        "direct_messages/new",
-        array("user_id" => $objUm->id, "text" => "A gimon for you has been posted.\nあなた宛てのgimonが投稿されました。\n".WEB_URL)
-      );
+      if($this::checkBadWords($objGm->text) >= 5) {
+        $result = $twitter->post(
+          "direct_messages/new",
+          array("user_id" => $objUm->id, "text" => "A gimon for you has been posted.\nあなた宛てのgimonが投稿されました。\n".WEB_URL)
+        );
+      }
+      else {
+        $result = $twitter->post(
+          "direct_messages/new",
+          array("user_id" => $objUm->id, "text" => "A gimon for you has been posted.\nあなた宛てのgimonが投稿されました。\n".$text."\n".WEB_URL)
+        );
+
+      }
+
 
       //Templateパスを変更
       $this->templatePath="gimon/added.tpl";
