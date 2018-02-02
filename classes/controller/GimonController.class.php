@@ -189,7 +189,7 @@ class GimonController extends ControllerBase
       else {
         $result = $twitter->post(
           "direct_messages/new",
-          array("user_id" => $objUm->id, "text" => "A gimon for you has been posted.\nあなた宛てのgimonが投稿されました。\n".$objGm->$text."\n".WEB_URL)
+          array("user_id" => $objUm->id, "text" => "A gimon for you has been posted.\nあなた宛てのgimonが投稿されました。\n".$objGm->text."\n".WEB_URL)
         );
 
       }
