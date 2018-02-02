@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.32-dev-35, created on 2018-01-30 14:56:28
+/* Smarty version 3.1.32-dev-35, created on 2018-02-02 18:31:23
   from 'C:\xampp\htdocs\gimon\view\templates\gimon\add.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.32-dev-35',
-  'unifunc' => 'content_5a70090cdb12d7_41218232',
+  'unifunc' => 'content_5a742feb8c4046_29300423',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '471a49010dbd4ae16dcef729a65317b1e9d89886' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gimon\\view\\templates\\gimon\\add.tpl',
-      1 => 1517291758,
+      1 => 1517563881,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../template/footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a70090cdb12d7_41218232 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a742feb8c4046_29300423 (Smarty_Internal_Template $_smarty_tpl) {
 ob_start();
 echo $_smarty_tpl->tpl_vars['WEB']->value;
 $_prefixVariable1 = ob_get_clean();
@@ -50,6 +50,28 @@ $_smarty_tpl->_subTemplateRender('file:../template/header.tpl', $_smarty_tpl->ca
     <a class="uk-button uk-button-default"  href="<?php echo $_smarty_tpl->tpl_vars['WEB']->value;?>
 ">Sign up / Sign in<br><span class="uk-text-meta">新規登録 / ログイン</span></a>
   </div>
+  <hr>
+  <h3>Answers of <?php echo $_smarty_tpl->tpl_vars['username']->value;?>
+</h3>
+  <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['answers']->value, 'answer');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['answer']->value) {
+?>
+  <div class="uk-card uk-card-default uk-card-small">
+    <div class="uk-card-body">
+      <p><?php echo $_smarty_tpl->tpl_vars['answer']->value;?>
+</p>
+    </div>
+  </div>
+  <br>
+  <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+
 </div>
 <?php $_smarty_tpl->_subTemplateRender('file:../template/footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>

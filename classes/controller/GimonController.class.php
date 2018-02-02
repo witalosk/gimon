@@ -189,7 +189,7 @@ class GimonController extends ControllerBase
       else {
         $result = $twitter->post(
           "direct_messages/new",
-          array("user_id" => $objUm->id, "text" => "A gimon for you has been posted.\nあなた宛てのgimonが投稿されました。\n".$text."\n".WEB_URL)
+          array("user_id" => $objUm->id, "text" => "A gimon for you has been posted.\nあなた宛てのgimonが投稿されました。\n".$objGm->$text."\n".WEB_URL)
         );
 
       }
@@ -201,6 +201,42 @@ class GimonController extends ControllerBase
     $this->view->assign('username', $params[0]);
     $this->view->assign('name', $objUm->name);
     $this->view->assign('screen_name', $objUm->screen_name);
+
+    //過去の疑問一覧表示
+    $gimons = GimonController::getGimonsFromDestination($objUm->id);
+    $ids = [];
+    $answers =[];
+    foreach ($gimons as $gimon) {
+      if(null != $gimon->answer) {
+        array_push($ids, $gimon->answer);
+      }
+    }
+    //過去の回答を取得
+    if(null != $ids)
+    {
+      $access_token = $_SESSION['access_token'];
+      $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
+
+      $result_tweet = $connection->get(
+        "statuses/lookup",
+        array("id" => implode(',', $ids))
+      );
+      if(isset($result_tweet[0]->text)) {
+        foreach ($result_tweet as $value) {
+          array_push($answers, nl2br($value->text));
+        }
+      }
+      else {
+        array_push($answers, "どうやら回答のツイートを削除したようです。/ The answer tweet has been deleted.");
+      }
+    }
+    else {
+      array_push($answers, "過去のツイートはありません。 / There are no answer.");
+    }
+
+    $this->view->assign('answers', $answers);
+
+
     //Twitterカード用
     $this->meta = '
     <meta name="twitter:card" content="summary" />
@@ -219,11 +255,12 @@ class GimonController extends ControllerBase
   public static function getGimonsFromDestination($id)
   {
     $array = GimonDao::getDaoFromDestinationId($id);
-    $objGm = new GimonModel;
     $result = [];
     foreach($array as $gimon) {
+      $objGm = new GimonModel;
       $objGm->setProperty($gimon);
       array_push($result, $objGm);
+      unset($objGm);
     }
     return $result;
   }

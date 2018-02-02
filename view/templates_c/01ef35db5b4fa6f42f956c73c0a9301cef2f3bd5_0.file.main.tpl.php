@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.32-dev-35, created on 2018-01-30 18:08:19
+/* Smarty version 3.1.32-dev-35, created on 2018-02-02 18:29:20
   from 'C:\xampp\htdocs\gimon\view\templates\user\main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.32-dev-35',
-  'unifunc' => 'content_5a7036039eac92_83555541',
+  'unifunc' => 'content_5a742f7018eba5_86576396',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '01ef35db5b4fa6f42f956c73c0a9301cef2f3bd5' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gimon\\view\\templates\\user\\main.tpl',
-      1 => 1517303286,
+      1 => 1517330264,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../template/footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a7036039eac92_83555541 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a742f7018eba5_86576396 (Smarty_Internal_Template $_smarty_tpl) {
 ob_start();
 echo $_smarty_tpl->tpl_vars['WEB']->value;
 $_prefixVariable1 = ob_get_clean();
@@ -31,7 +31,7 @@ $_smarty_tpl->_subTemplateRender('file:../template/header.tpl', $_smarty_tpl->ca
 
 <!-- menu -->
 <div class="uk-offcanvas-content">
-    <div id="offcanvas-flip" uk-offcanvas="flip: true; overlay: false">
+    <div id="offcanvas-flip" uk-offcanvas="flip: true; overlay: false" class="ms-z9999">
         <div class="uk-offcanvas-bar">
             <button class="uk-offcanvas-close" type="button" uk-close></button>
             <h3>Menu</h3>
@@ -46,7 +46,7 @@ user/logout" class="uk-button uk-button-default uk-margin-bottom uk-width-1-1">L
     </div>
 
 </div>
-<div class="uk-position-fixed uk-position-medium uk-position-top-right">
+<div class="uk-position-fixed uk-position-medium uk-position-top-right ms-z999">
   <button class="uk-button uk-button-primary uk-light default-primary-color" type="button" uk-toggle="target: #offcanvas-flip">Menu</button>
 </div>
 <div class="uk-container uk-text-center">
@@ -121,8 +121,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
     <form action="" method="post">
       <textarea name="text" class="uk-textarea" rows="4">
 #gimon
-#<?php echo $_smarty_tpl->tpl_vars['screen_name']->value;?>
-Gimon
+#gimon<?php echo $_smarty_tpl->tpl_vars['screen_name']->value;?>
+
 <?php echo $_smarty_tpl->tpl_vars['url']->value;?>
 
       </textarea>
@@ -153,14 +153,12 @@ user/block">
 function copyText(text){
   var ta = document.createElement("textarea")
   ta.value = text
-  document.body.appendChild(ta)
+  $('#menu').append(ta)
   ta.select()
   document.execCommand("copy")
   ta.parentElement.removeChild(ta)
   UIkit.notification('Copyed!');
 }
-
-
 
 <?php echo $_smarty_tpl->tpl_vars['script']->value;?>
 

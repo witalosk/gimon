@@ -17,5 +17,16 @@
   <div class="uk-panel">
     <a class="uk-button uk-button-default"  href="{$WEB}">Sign up / Sign in<br><span class="uk-text-meta">新規登録 / ログイン</span></a>
   </div>
+  <hr>
+  <h3>Answers of {$username}</h3>
+  {foreach from=$answers item=answer}
+  <div class="uk-card uk-card-default uk-card-small">
+    <div class="uk-card-body">
+      <p>{$answer}</p>
+    </div>
+  </div>
+  <br>
+  {/foreach}
+
 </div>
 {include file='../template/footer.tpl'}
