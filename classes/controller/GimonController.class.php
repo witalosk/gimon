@@ -214,7 +214,7 @@ class GimonController extends ControllerBase
     //過去の回答を取得
     if(null != $ids)
     {
-      $access_token = $_SESSION['access_token'];
+      @$access_token = $_SESSION['access_token'];
       $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 
       $result_tweet = $connection->get(
@@ -223,18 +223,18 @@ class GimonController extends ControllerBase
       );
       if(isset($result_tweet[0]->text)) {
         foreach ($result_tweet as $value) {
-          array_push($answers, nl2br($value->text)."<br><br><span class='uk-text-meta'>".date('Y/m/d H:i:s', strtotime($value->created_at))."</span>");
+          $answers[strtotime($value->created_at)] = nl2br($value->text)."<br><br><span class='uk-text-meta'>".date('Y/m/d H:i:s', strtotime($value->created_at))."</span>";
         }
       }
       else {
-        array_push($answers, "どうやら回答のツイートを削除したようです。/ The answer tweet has been deleted.");
+
       }
     }
     else {
       array_push($answers, "過去のツイートはありません。 / There are no answer.");
     }
-
-    $this->view->assign('answers', array_reverse($answers));
+    krsort($answers);
+    $this->view->assign('answers', $answers);
 
 
     //Twitterカード用
