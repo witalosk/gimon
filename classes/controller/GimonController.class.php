@@ -223,7 +223,7 @@ class GimonController extends ControllerBase
       );
       if(isset($result_tweet[0]->text)) {
         foreach ($result_tweet as $value) {
-          array_push($answers, nl2br($value->text)."<br><br><span class='uk-text-meta'>".$value->created_at."</span>");
+          array_push($answers, nl2br($value->text)."<br><br><span class='uk-text-meta'>".date('Y/m/d H:i:s', strtotime($value->created_at))."</span>");
         }
       }
       else {
