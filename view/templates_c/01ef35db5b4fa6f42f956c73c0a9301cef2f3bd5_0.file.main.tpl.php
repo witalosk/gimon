@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.32-dev-35, created on 2018-02-02 18:29:20
+/* Smarty version 3.1.32-dev-35, created on 2018-02-02 19:07:15
   from 'C:\xampp\htdocs\gimon\view\templates\user\main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.32-dev-35',
-  'unifunc' => 'content_5a742f7018eba5_86576396',
+  'unifunc' => 'content_5a7438531cf1d0_24011849',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '01ef35db5b4fa6f42f956c73c0a9301cef2f3bd5' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gimon\\view\\templates\\user\\main.tpl',
-      1 => 1517330264,
+      1 => 1517566033,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../template/footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a742f7018eba5_86576396 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a7438531cf1d0_24011849 (Smarty_Internal_Template $_smarty_tpl) {
 ob_start();
 echo $_smarty_tpl->tpl_vars['WEB']->value;
 $_prefixVariable1 = ob_get_clean();
@@ -47,7 +47,7 @@ user/logout" class="uk-button uk-button-default uk-margin-bottom uk-width-1-1">L
 
 </div>
 <div class="uk-position-fixed uk-position-medium uk-position-top-right ms-z999">
-  <button class="uk-button uk-button-primary uk-light default-primary-color" type="button" uk-toggle="target: #offcanvas-flip">Menu</button>
+  <button class="uk-button uk-button-primary uk-light default-primary-color" type="button" uk-toggle="target: #offcanvas-flip"><span uk-icon="icon: menu"></span> Menu</button>
 </div>
 <div class="uk-container uk-text-center">
   <h3 class="uk-margin-top">Gimons for <?php echo $_smarty_tpl->tpl_vars['username']->value;?>
@@ -111,6 +111,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
 
   <br>
   <a href="#" uk-totop uk-scroll></a>
+  <br>
   <br>
 </div>
 
