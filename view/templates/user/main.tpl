@@ -55,6 +55,7 @@
   <br>
   <a href="#" uk-totop uk-scroll></a>
   <br>
+  <br>
 </div>
 
 <!-- This is the modal -->

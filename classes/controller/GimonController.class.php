@@ -234,7 +234,7 @@ class GimonController extends ControllerBase
       array_push($answers, "過去のツイートはありません。 / There are no answer.");
     }
 
-    $this->view->assign('answers', $answers);
+    $this->view->assign('answers', array_reverse($answers));
 
 
     //Twitterカード用
