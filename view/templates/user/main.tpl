@@ -17,10 +17,12 @@
 <div class="uk-position-fixed uk-position-medium uk-position-top-right ms-z999">
   <button class="uk-button uk-button-primary uk-light default-primary-color" type="button" uk-toggle="target: #offcanvas-flip"><span uk-icon="icon: menu"></span> Menu</button>
 </div>
-<div class="uk-container uk-text-center">
+
+
+<div id="content" class="uk-container uk-text-center">
   <h3 class="uk-margin-top">Gimons for {$username}</h3>
   <p>Your URL to post gimons: <a href="{$url}">{$url}</a></p>
-  <p>DMで通知を受け取るには <a href="https://twitter.com/gimon_noyatsu">@gimon_noyatsu をフォロー</a>しなければいけません。<br>
+  <p>DMで通知を受け取るには <a href="https://twitter.com/gimon_noyatsu">@gimon_noyatsu をフォロー</a>してください。<br>
   <span class="ms-mini">You must <a href="https://twitter.com/gimon_noyatsu">follow @gimon_noyatsu</a> to receive notifications in DM.</span></p>
 
   {foreach from=$gimons item=gimon}
@@ -33,7 +35,7 @@
     <div class="uk-card-footer">
       <a href="{$WEB}gimon/tweet/{$gimon.id}" class="uk-button uk-button-primary">Share with Comment</a>
       <button class="uk-button uk-button-default uk-icon-link" uk-icon="icon: more" type="button"></button>
-      <div uk-dropdown="mode: click">
+      <div class="ms-z9999" uk-dropdown="mode: click">
         <ul class="uk-nav uk-dropdown-nav">
           <li><a href="{$WEB}gimon/delete/{$gimon.id}"><span uk-icon="icon: trash"></span> Delete this gimon</a></li>
           <li><a id="block{$gimon.id}" data-num="{$gimon.id}" href="#"><span uk-icon="icon: minus-circle"></span> Block this user</a></li>
@@ -90,6 +92,7 @@
 
 <script>
 {literal}
+
 function copyText(text){
   var ta = document.createElement("textarea")
   ta.value = text
@@ -102,4 +105,4 @@ function copyText(text){
 {/literal}
 {$script}
 </script>
-{include file='../template/footer.tpl'}
+{include file='../template/footer.tpl' WEB={$WEB}}

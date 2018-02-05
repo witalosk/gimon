@@ -1,5 +1,5 @@
 {include file='../template/header.tpl' title='Ask Gimons' WEB={$WEB}}
-<div class="uk-container uk-text-center">
+<div id="content" class="uk-container uk-text-center">
   <br>
   <div class="uk-card uk-card-default uk-card-small">
     <div class="uk-card-header">
@@ -20,7 +20,7 @@
   <hr>
   <h3>Answers of {$username}</h3>
   {foreach from=$answers item=answer}
-  <div class="uk-card uk-card-default uk-card-small">
+  <div class="uk-card uk-card-default uk-card-small" uk-scrollspy="cls: uk-animation-fade; repeat: true">
     <div class="uk-card-body">
       <p>{$answer}</p>
     </div>
@@ -32,4 +32,4 @@
   <br>
   <br>
 </div>
-{include file='../template/footer.tpl'}
+{include file='../template/footer.tpl' WEB={$WEB}}

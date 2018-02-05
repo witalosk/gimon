@@ -4,15 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {$meta}
-  <link rel="apple-touch-icon" href="{$WEB}logo.PNG"; sizes="205x205" />
-  <link rel="icon" href="{$WEB}logo.PNG"; sizes="205x205" />
+  <link rel="apple-touch-icon" href="{$WEB}logo.PNG" sizes="205x205" />
+  <link rel="icon" href="{$WEB}logo.PNG" sizes="205x205" />
   <link rel="stylesheet" href="{$WEB}css/uikit.min.css" />
   <link rel="stylesheet" href="{$WEB}css/master.css" />
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>  <script src="{$WEB}js/uikit.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="{$WEB}js/uikit.min.js"></script>
   <script src="{$WEB}js/uikit-icons.min.js"></script>
-  <title>{$title} - gimon</title>
+  <script src="{$WEB}js/barba.js"></script>
+<title>{$title} - gimon</title>
 </head>
 <body class="uk-background-muted">
+  <div id="barba-wrapper">
+  <div class="barba-container">
   <header class="">
     <nav class="default-primary-color primary-text-color uk-padding" uk-navbar>
       <div class="uk-navbar-left">
@@ -35,4 +39,4 @@
 -->
 </nav>
 </header>
-<main class="uk-animation-fade">
+<main class="">

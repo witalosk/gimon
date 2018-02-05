@@ -1,5 +1,5 @@
 {include file='../template/header.tpl' title='Ask Gimons' WEB={$WEB}}
-<div class="uk-container uk-text-center">
+<div id="content" class="uk-container uk-text-center">
   <br>
   <div class="uk-card uk-card-default uk-card-small">
     <div class="uk-card-header">
@@ -12,4 +12,4 @@
     </div>
   </div>
 </div>
-{include file='../template/footer.tpl'}
+{include file='../template/footer.tpl' WEB={$WEB}}

@@ -1,5 +1,5 @@
 {include file='../template/header.tpl' title='LOGIN' WEB={$WEB}}
-<div class="uk-container uk-text-center">
+<div id="content" class="uk-container uk-text-center">
   <br>
   <div class="uk-card uk-card-default uk-card-body">
     <h3 class="uk-meta">匿名質問サービス「gimon.noyatsu」</h3>
@@ -37,4 +37,4 @@
   <br>
   <br>
 </div>
-{include file='../template/footer.tpl'}
+{include file='../template/footer.tpl' WEB={$WEB}}

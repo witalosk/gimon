@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.32-dev-35, created on 2018-02-02 19:07:15
+/* Smarty version 3.1.32-dev-35, created on 2018-02-05 19:23:16
   from 'C:\xampp\htdocs\gimon\view\templates\user\main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.32-dev-35',
-  'unifunc' => 'content_5a7438531cf1d0_24011849',
+  'unifunc' => 'content_5a783094852ee1_50416634',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '01ef35db5b4fa6f42f956c73c0a9301cef2f3bd5' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gimon\\view\\templates\\user\\main.tpl',
-      1 => 1517566033,
+      1 => 1517826195,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../template/footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a7438531cf1d0_24011849 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a783094852ee1_50416634 (Smarty_Internal_Template $_smarty_tpl) {
 ob_start();
 echo $_smarty_tpl->tpl_vars['WEB']->value;
 $_prefixVariable1 = ob_get_clean();
@@ -49,13 +49,15 @@ user/logout" class="uk-button uk-button-default uk-margin-bottom uk-width-1-1">L
 <div class="uk-position-fixed uk-position-medium uk-position-top-right ms-z999">
   <button class="uk-button uk-button-primary uk-light default-primary-color" type="button" uk-toggle="target: #offcanvas-flip"><span uk-icon="icon: menu"></span> Menu</button>
 </div>
-<div class="uk-container uk-text-center">
+
+
+<div id="content" class="uk-container uk-text-center">
   <h3 class="uk-margin-top">Gimons for <?php echo $_smarty_tpl->tpl_vars['username']->value;?>
 </h3>
   <p>Your URL to post gimons: <a href="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
-" class="uk-button uk-button-text"><?php echo $_smarty_tpl->tpl_vars['url']->value;?>
+"><?php echo $_smarty_tpl->tpl_vars['url']->value;?>
 </a></p>
-  <p>DMで通知を受け取るには <a href="https://twitter.com/gimon_noyatsu">@gimon_noyatsu をフォロー</a>しなければいけません。<br>
+  <p>DMで通知を受け取るには <a href="https://twitter.com/gimon_noyatsu">@gimon_noyatsu をフォロー</a>してください。<br>
   <span class="ms-mini">You must <a href="https://twitter.com/gimon_noyatsu">follow @gimon_noyatsu</a> to receive notifications in DM.</span></p>
 
   <?php
@@ -77,7 +79,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['gimon']->value) {
 gimon/tweet/<?php echo $_smarty_tpl->tpl_vars['gimon']->value['id'];?>
 " class="uk-button uk-button-primary">Share with Comment</a>
       <button class="uk-button uk-button-default uk-icon-link" uk-icon="icon: more" type="button"></button>
-      <div uk-dropdown="mode: click">
+      <div class="ms-z9999" uk-dropdown="mode: click">
         <ul class="uk-nav uk-dropdown-nav">
           <li><a href="<?php echo $_smarty_tpl->tpl_vars['WEB']->value;?>
 gimon/delete/<?php echo $_smarty_tpl->tpl_vars['gimon']->value['id'];?>
@@ -151,6 +153,7 @@ user/block">
 <?php echo '<script'; ?>
 >
 
+
 function copyText(text){
   var ta = document.createElement("textarea")
   ta.value = text
@@ -165,7 +168,10 @@ function copyText(text){
 
 <?php echo '</script'; ?>
 >
-<?php $_smarty_tpl->_subTemplateRender('file:../template/footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+<?php ob_start();
+echo $_smarty_tpl->tpl_vars['WEB']->value;
+$_prefixVariable2 = ob_get_clean();
+$_smarty_tpl->_subTemplateRender('file:../template/footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('WEB'=>$_prefixVariable2), 0, false);
 ?>
 
 <?php }

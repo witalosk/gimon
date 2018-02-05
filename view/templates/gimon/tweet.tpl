@@ -1,5 +1,5 @@
 {include file='../template/header-b.tpl' title='Share with comment' WEB={$WEB}}
-<div class="uk-container uk-text-center">
+<div id="content" class="uk-container uk-text-center">
   <br>
   <div class="uk-card uk-card-default uk-card-small">
     <div class="uk-card-header">
@@ -25,6 +25,8 @@
   </div>
 </div>
 <script>
+inAnime = 'uk-animation-fade';
+outAnime = 'uk-animation-fade';
 {$script}
 </script>
-{include file='../template/footer.tpl'}
+{include file='../template/footer.tpl' WEB={$WEB}}

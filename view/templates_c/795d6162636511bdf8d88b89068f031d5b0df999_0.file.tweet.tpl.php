@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.32-dev-35, created on 2018-01-30 17:57:17
+/* Smarty version 3.1.32-dev-35, created on 2018-02-05 18:10:36
   from 'C:\xampp\htdocs\gimon\view\templates\gimon\tweet.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.32-dev-35',
-  'unifunc' => 'content_5a70336d7eab17_11084461',
+  'unifunc' => 'content_5a781f8cec0582_19692305',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '795d6162636511bdf8d88b89068f031d5b0df999' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gimon\\view\\templates\\gimon\\tweet.tpl',
-      1 => 1517302634,
+      1 => 1517821199,
       2 => 'file',
     ),
   ),
@@ -22,14 +22,14 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../template/footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a70336d7eab17_11084461 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a781f8cec0582_19692305 (Smarty_Internal_Template $_smarty_tpl) {
 ob_start();
 echo $_smarty_tpl->tpl_vars['WEB']->value;
 $_prefixVariable1 = ob_get_clean();
 $_smarty_tpl->_subTemplateRender('file:../template/header-b.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('title'=>'Share with comment','WEB'=>$_prefixVariable1), 0, false);
 ?>
 
-<div class="uk-container uk-text-center">
+<div id="content" class="uk-container uk-text-center">
   <br>
   <div class="uk-card uk-card-default uk-card-small">
     <div class="uk-card-header">
@@ -59,11 +59,16 @@ $_smarty_tpl->_subTemplateRender('file:../template/header-b.tpl', $_smarty_tpl->
 </div>
 <?php echo '<script'; ?>
 >
+inAnime = 'uk-animation-fade';
+outAnime = 'uk-animation-fade';
 <?php echo $_smarty_tpl->tpl_vars['script']->value;?>
 
 <?php echo '</script'; ?>
 >
-<?php $_smarty_tpl->_subTemplateRender('file:../template/footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+<?php ob_start();
+echo $_smarty_tpl->tpl_vars['WEB']->value;
+$_prefixVariable2 = ob_get_clean();
+$_smarty_tpl->_subTemplateRender('file:../template/footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('WEB'=>$_prefixVariable2), 0, false);
 ?>
 
 <?php }
