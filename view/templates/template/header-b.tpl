@@ -9,6 +9,8 @@
   <meta property="og:title" content="gimon.noyatsu" />
   <meta property="og:description" content="Answer questions from your follower." />
   <meta property="og:image" content="{$WEB}logo.PNG" />
+  <link rel="apple-touch-icon" href="{$WEB}logo.PNG"; sizes="205x205" />
+  <link rel="icon" href="{$WEB}logo.PNG"; sizes="205x205" />
   <link rel="stylesheet" href="{$WEB}css/uikit.min.css" />
   <link rel="stylesheet" href="{$WEB}css/master.css" />
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>  <script src="{$WEB}js/uikit.min.js"></script>

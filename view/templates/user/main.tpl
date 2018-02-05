@@ -19,7 +19,7 @@
 </div>
 <div class="uk-container uk-text-center">
   <h3 class="uk-margin-top">Gimons for {$username}</h3>
-  <p>Your URL to post gimons: <a href="{$url}" class="uk-button uk-button-text">{$url}</a></p>
+  <p>Your URL to post gimons: <a href="{$url}">{$url}</a></p>
   <p>DMで通知を受け取るには <a href="https://twitter.com/gimon_noyatsu">@gimon_noyatsu をフォロー</a>しなければいけません。<br>
   <span class="ms-mini">You must <a href="https://twitter.com/gimon_noyatsu">follow @gimon_noyatsu</a> to receive notifications in DM.</span></p>
 
