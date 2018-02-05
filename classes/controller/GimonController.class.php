@@ -180,21 +180,20 @@ class GimonController extends ControllerBase
 
       $twitter = new TwitterOAuth($consumerKey_a, $consumerSecret_a, $accessToken_a, $accessTokenSecret_a);
 
-      if($this::checkBadWords($objGm->text) >= 5) {
-        $result = $twitter->post(
-          "direct_messages/new",
-          array("user_id" => $objUm->id, "text" => "A gimon for you has been posted.\nあなた宛てのgimonが投稿されました。\n[非表示]\n".WEB_URL)
-        );
+      if(strpos($objUm->blocklist, $objGm->ipaddress) != false) {
+        if($this::checkBadWords($objGm->text) >= 5) {
+          $result = $twitter->post(
+            "direct_messages/new",
+            array("user_id" => $objUm->id, "text" => "A gimon for you has been posted.\nあなた宛てのgimonが投稿されました。\n[非表示]\n".WEB_URL)
+          );
+        }
+        else {
+          $result = $twitter->post(
+            "direct_messages/new",
+            array("user_id" => $objUm->id, "text" => "A gimon for you has been posted.\nあなた宛てのgimonが投稿されました。\n".$objGm->text."\n".WEB_URL)
+          );
+        }
       }
-      else {
-        $result = $twitter->post(
-          "direct_messages/new",
-          array("user_id" => $objUm->id, "text" => "A gimon for you has been posted.\nあなた宛てのgimonが投稿されました。\n".$objGm->text."\n".WEB_URL)
-        );
-
-      }
-
-
       //Templateパスを変更
       $this->templatePath="gimon/added.tpl";
     }
@@ -214,7 +213,7 @@ class GimonController extends ControllerBase
     //過去の回答を取得
     if(null != $ids)
     {
-      $access_token = $_SESSION['access_token'];
+      @$access_token = $_SESSION['access_token'];
       $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 
       $result_tweet = $connection->get(
@@ -223,17 +222,17 @@ class GimonController extends ControllerBase
       );
       if(isset($result_tweet[0]->text)) {
         foreach ($result_tweet as $value) {
-          array_push($answers, nl2br($value->text));
+          $answers[strtotime($value->created_at)] = nl2br($value->text)."<br><br><span class='uk-text-meta'>".date('Y/m/d H:i:s', strtotime($value->created_at))."</span>";
         }
       }
       else {
-        array_push($answers, "どうやら回答のツイートを削除したようです。/ The answer tweet has been deleted.");
+
       }
     }
     else {
       array_push($answers, "過去のツイートはありません。 / There are no answer.");
     }
-
+    krsort($answers);
     $this->view->assign('answers', $answers);
 
 

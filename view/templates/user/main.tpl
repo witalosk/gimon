@@ -15,7 +15,7 @@
 
 </div>
 <div class="uk-position-fixed uk-position-medium uk-position-top-right ms-z999">
-  <button class="uk-button uk-button-primary uk-light default-primary-color" type="button" uk-toggle="target: #offcanvas-flip">Menu</button>
+  <button class="uk-button uk-button-primary uk-light default-primary-color" type="button" uk-toggle="target: #offcanvas-flip"><span uk-icon="icon: menu"></span> Menu</button>
 </div>
 <div class="uk-container uk-text-center">
   <h3 class="uk-margin-top">Gimons for {$username}</h3>
@@ -54,6 +54,7 @@
 
   <br>
   <a href="#" uk-totop uk-scroll></a>
+  <br>
   <br>
 </div>
 
