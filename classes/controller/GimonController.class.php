@@ -89,6 +89,7 @@ class GimonController extends ControllerBase
       Db::commit();
     }
 
+    $this->view->assign('all', 280 - mb_strwidth("Q: {$objGm->text}\nA: \n#gimon #gimon{$objUm->screen_name}\n",'UTF-8'));
     $this->view->assign('gimon', (array)$objGm);
     $this->view->assign('script', $script);
     $this->view->assign('answer', $answer);
