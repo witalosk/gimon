@@ -1,0 +1,32 @@
+<?php
+//config
+//サーバーのページルートのディレクトリ
+define('BASE_DIR', __DIR__);
+
+//WebrootのURL
+$WEB_URL = "http://localhost/";
+define('WEB_URL', 'http://localhost/');
+
+//Webrootまでのディレクトリ数
+define("DIR_NUM", 0);
+
+//デフォルトタイムゾーン
+date_default_timezone_set('Asia/Tokyo');
+
+//database
+define("DSN", "mysql:dbname=%s;host=localhost;charset=utf8");
+define("DBNAME", "gimon");
+define("DBUSER", "root");
+define("DBPASS", "");
+
+//twitter
+define( 'OAUTH_CALLBACK', 'http://localhost/user/callback' );
+//公式アカウント
+define( 'CONSUMER_KEY', '???' );
+define( 'CONSUMER_SECRET', '???' );
+
+//error
+error_reporting(E_ALL);
+
+//セッション有効期限
+ini_set( 'session.gc_maxlifetime', 43200 );
